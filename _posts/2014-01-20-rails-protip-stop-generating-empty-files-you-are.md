@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 'Rails ProTip: Stop generating empty files you are not gonna use!'
+title: 'Rails ProTip: Stop generating empty files you're not gonna use!'
 date: '2014-01-20T09:38:00+00:00'
 tags:
 - rails protip
