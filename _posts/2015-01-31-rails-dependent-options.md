@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Rails ActiveRecord dependent options"
+title: Rails Dependent Associations
 date: 2015-01-31T09:38:00+00:00
 tags:
 - Rails
@@ -8,11 +8,11 @@ tags:
 - Ruby
 - Programming
 ---
+ddd
 
-This is a test line
+I often see the dependent parameter forgotten on projects, this is easy to do if you are new to Rails.
+When dependent is not set nothing terrible happens at first but at some point you will start seeing this.
 
-One of the common issues I see when working on Rails app’s that were created by developers less experienced was the Rails framework is missing the dependent option from a has_many/has_one.
-This causes this common error.
 
 {% highlight bash %}
 2.1.2 :013 > Comment.first.post.title
@@ -21,16 +21,13 @@ This causes this common error.
 		NoMethodError: undefined method `title' for nil:NilClass
 {% endhighlight %}
 
-This is because there parent record no longer exists but the foreign key still references the parent object.
-
-I think it is an oversight that this is not configured by default to be the most common option “dependent: :destroy”.
-As Rails ethos is convention over configuration.
-
-The available dependent options are as follows:
+The cause of the error is the parent record no longer exists but the foreign key still references the parent object.
+To stop this from happening you can use the dependent option with has many and has one.
+Dependent simply tells destroy what to do with child records. The available dependent options are as follows:
 
 # Destroy
 
-This is the option that most Rails app use as it covers the expected outcome, if you delete a post for example you probably want to delete the comments for example.
+The destroy option is the most common in a Rails app as it is the most likely scenario. When you delete a post you probably want to remove the comments as well.
 
 {% highlight ruby %}
 class Post < ActiveRecord::Base
@@ -38,7 +35,7 @@ class Post < ActiveRecord::Base
 end
 {% endhighlight %}
 
-Now when you delete the post the comment is also deleted. This the best outcome less you need the comment to be kept which is our next option.
+Now when you delete the post the comments are also deleted.
 
 {% highlight bash %}
 2.1.2 :003 > p.destroy
@@ -50,9 +47,12 @@ Now when you delete the post the comment is also deleted. This the best outcome 
  => #<Post id: 3, title: "Post 101", body: nil, created_at: "2015-01-31 13:01:43", updated_at: "2015-01-31 13:01:43">
 {% endhighlight %}
 
+The destroy option should be a default in Rails because of the ethos of convention over configuration. Currently what happens is the child record doesn't have its foreign key nullified, which is the next option we will look at.
+I don't think we could change this default now as it would cause unexpected behaviors when updating to a new Rails version.
+
 # Nullify
 
-Alot of developers don't know this option exist.
+Nullify is the opposite to destroy, the child record is not destroyed after Active Record removes the parent. Not that many developers know about this option exist.
 
 {% highlight ruby %}
 class Post < ActiveRecord::Base
@@ -74,7 +74,7 @@ Now when you delete the post the comment is not deleted. Instead the foreign key
  => #<Comment id: 4, body: "My comment", post_id: nil, created_at: "2015-01-31 13:07:24", updated_at: "2015-01-31 13:07:24">
 {% endhighlight %}
 
-This is better then the default of leaving the foreign key set but this will still cause an error if you try and access the post.
+This is better then leaving the foreign key set but this will still cause an error if you try and access the post.
 
 {% highlight bash %}
 2.1.2 :006 > Comment.find(4).post.title
@@ -84,7 +84,9 @@ NoMethodError: undefined method `title' for nil:NilClass
 
 # Restrict with Exception
 
-I have to admit I hadn't heard of this option but I can imagine it to be useful if you wanted to protect against posts with comments being deleted.
+The next available option I have to admit I hadn't seen or used before. Restrict with exception raises an exception when destroy is called on a parent record with children. If the parent doesn't have associated children then the parent will be deleted.
+
+I can imagine it to be useful if you wanted to protect against posts with comments being deleted.
 
 {% highlight ruby %}
 class Post < ActiveRecord::Base
@@ -104,7 +106,7 @@ As you can see this raises an ActiveRecord::DeleteRestrictionError exception if 
 
 # Restrict with Error
 
-The last option is to set an error on the post object, which is better then restrict_with_exception if you are plaaning to use this in a scenario when an admin is trying to delete a post.
+The last option is restrict with error which sets an error on the parent record if the parent has child records associated.
 
 {% highlight ruby %}
 class Post < ActiveRecord::Base
@@ -122,9 +124,10 @@ end
  => #<ActiveModel::Errors:0x000001016a9828 @base=#<Post id: 6, title: "Post 101", body: nil, created_at: "2015-01-31 13:19:36", updated_at: "2015-01-31 13:19:36">, @messages={:base=>["Cannot delete record because dependent comments exist"]}>
 {% endhighlight %}
 
-ActiveRecord has added an error to the errors attribute in the same way as a validation error would be added, this set you up perfectly to display this error to the admin trying to delete the post.
-I think restrict_with_error could be a replacement to doing a custom validation rule in less code but you would lose the if/unless functionality available in valiations.
+Active Record has added an error to the errors attribute in the same way as a validation error would be added.
+I think this would work well with validations as you can  display this error to the admin trying to delete the post.
+Restrict with error could be a replacement to doing a custom validation rule in less code. The downside you would lose the if/unless functionality available in validation.
 
-I know that the dependent option is not the most exciting thing to read about but knowing the less know option in a framework can save you time when working on your next amazing feature.
+I know that the dependent parameter is not the most exciting thing to read about but knowing the less known features in a framework can save you time when working on your next amazing feature.
 
 Alex
