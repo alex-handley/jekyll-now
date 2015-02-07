@@ -1,0 +1,28 @@
+---
+layout: post
+title: 'Rails tip: Titleize acronyms '
+date: '2013-10-09T09:59:00+01:00'
+tags:
+- ruby on rails
+- Programming
+---
+<p>I ran into a problem whilst trying to titleize a string containing an acronym. For example:</p>
+{% highlight ruby %}
+  "building an API".titleize
+{% endhighlight %}
+<p>Will output</p>
+{% highlight ruby %}
+  Building An Api
+{% endhighlight %}
+<p>Not exactly what I was after but with a small change to the Inflector class you can define your own acronyms.</p>
+<p>config/initializers/inflections.rb</p>
+{% highlight ruby %}
+ActiveSupport::Inflector.inflections do |inflect|
+  inflect.acronym "API"
+end
+{% endhighlight %}
+<p>Now:</p>
+{% highlight ruby %}
+  "Building An API".titleize
+{% endhighlight %}
+

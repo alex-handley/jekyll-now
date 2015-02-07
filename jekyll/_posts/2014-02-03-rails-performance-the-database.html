@@ -1,0 +1,37 @@
+---
+layout: post
+title: 'Rails Performance: The Database'
+date: '2014-02-03T13:15:18+00:00'
+tags:
+- protip
+- ruby-on-rails
+- database-design
+- Programming
+---
+<p><span>My primary toolkit is the Ruby on Rails framework, and I mainly work with applications that have been in production for a while, which usually means they&#8217;re in</span> need of a little pick-me-up. I thought it would be good to write a mini series about the things I typically look for when developing and maintaining Rails apps.</p>
+<p><strong>Picking up a Database</strong></p>
+<p><span>When I start working on an app with history the first thing I do after bundling and running the test suite is create a diagram of the database. This used to take up lots of time because I was doing it by hand, </span>but recently I have been using <a href="https://github.com/voormedia/rails-erd" target="_blank">rails-erd</a> to automate the process.</p>
+<p>Running &#8220;rake erd&#8221; creates a pdf based off the applications models.</p>
+<p><img alt="image" src="https://31.media.tumblr.com/ef7632013898555a789cbb855304290b/tumblr_inline_mxx4wbeSOL1qbbu12.png"/></p>
+<p>This is a massive timesaver but it does take away the process of building the ERD diagram - which is invaluable for pointing out red flags such as associations that are not needed and fields that are no longer used.</p>
+<p>At secondary school I was lucky enough to take a Oracle certification in database design, and one of the core things we learned was Database Normalisation, which came with a set of guidelines for creating good databases. </p>
+<p><strong>The guidelines are broken into stages:</strong></p>
+<blockquote>
+<p><strong>First Normal Form (1NF)</strong></p>
+<p>Related data should be grouped into separate tables, there should not be duplicated fields in the same table and each row should have a unique key (Primary Key).</p>
+<p><strong>Second Normal Form (2NF)</strong></p>
+<p>Separate fields into a new table that apply to multiple rows.</p>
+<p><em>For example: if you have a projects table, the client should be in their own table so that when you update their address you only have to do it in one place, not in 10.</em></p>
+<p>Tables should be related to each other using primary and foreign keys to join the related tables.</p>
+<p><strong>Third Normal Form (3NF)</strong></p>
+<p>Ensure the columns in the table are dependent on the primary key.</p>
+<p><em>For example, if you have a teacher who is part of a department, they should be in separate tables because department is it own entity that can exist even if it hasn&#8217;t got any teachers.</em></p>
+<p><strong>Fourth and Fifth Normal Form (4NF)</strong></p>
+<p>Both fourth and fifth normal form discuss multivalue dependencies, which in Rails-land are Has and belong to many and has many through.</p>
+<p><em>For example: a skill should not be stored in the same table as a user.</em></p>
+</blockquote>
+
+<p>The Rails framework is pretty good at ensuring that these guidelines are followed, the generators automatically create a primary key, if you use the <a href="http://api.rubyonrails.org/classes/ActiveRecord/ConnectionAdapters/TableDefinition.html#method-i-references" target="_blank">references migration type</a> it will automagically set up the foreign key relation.</p>
+<p>These rules are definitely more of a suggestion and in some cases can be ignored if there are good reasons to do so: one example is optimisation. By storing all of a users skills as a serialised array in one field you could speed up a request by removing the need for doing a SQL join.</p>
+<p>I glossed over some of the finer details, so if you are interested in finding out more on the subject, a great technical paper to read is <a href="http://www.bkent.net/Doc/simple5.htm" target="_blank">A Simple Guide to Five Normal Forms in Relational Database Theory</a>. If you prefer lighter reading the <a href="http://databases.about.com/od/specificproducts/a/normalization.htm" target="_blank">about</a> series is pretty good.</p>
+<p>Alex</p>
