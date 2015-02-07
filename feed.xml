@@ -1,21 +1,175 @@
----
-layout: null
----
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>{{ site.name | xml_escape }}</title>
-    <description>{{ site.description | xml_escape }}</description>
-    <link>{{ site.url }}</link>
-    <atom:link href="{{ site.url }}/feed.xml" rel="self" type="application/rss+xml" />
-    {% for post in site.posts limit:10 %}
+    <title>Alex Handley</title>
+    <description>Developer working in London</description>
+    <link></link>
+    <atom:link href="/feed.xml" rel="self" type="application/rss+xml" />
+    
       <item>
-        <title>{{ post.title | xml_escape }}</title>
-        <description>{{ post.content | xml_escape }}</description>
-        <pubDate>{{ post.date | date: "%a, %d %b %Y %H:%M:%S %z" }}</pubDate>
-        <link>{{ site.url }}{{ post.url }}</link>
-        <guid isPermaLink="true">{{ site.url }}{{ post.url }}</guid>
+        <title>Rails Dependent Associations</title>
+        <description>&lt;p&gt;I often find that the dependent parameter gets forgotten on projects. This is easy to do if you&amp;#39;re new to Rails. When dependent is not set, nothing terrible happens at first… but once you get further into a project you will start seeing this:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;2.1.2 :013 &amp;gt; Comment.first.post.title
+  Comment Load &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;0.6ms&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;  SELECT  &lt;span class=&quot;s2&quot;&gt;&amp;quot;comments&amp;quot;&lt;/span&gt;.* FROM &lt;span class=&quot;s2&quot;&gt;&amp;quot;comments&amp;quot;&lt;/span&gt;   ORDER BY &lt;span class=&quot;s2&quot;&gt;&amp;quot;comments&amp;quot;&lt;/span&gt;.&lt;span class=&quot;s2&quot;&gt;&amp;quot;id&amp;quot;&lt;/span&gt; ASC LIMIT 1
+  Post Load &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;0.3ms&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;  SELECT  &lt;span class=&quot;s2&quot;&gt;&amp;quot;posts&amp;quot;&lt;/span&gt;.* FROM &lt;span class=&quot;s2&quot;&gt;&amp;quot;posts&amp;quot;&lt;/span&gt;  WHERE &lt;span class=&quot;s2&quot;&gt;&amp;quot;posts&amp;quot;&lt;/span&gt;.&lt;span class=&quot;s2&quot;&gt;&amp;quot;id&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$1&lt;/span&gt; LIMIT &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;[[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;id&amp;quot;&lt;/span&gt;, 1&lt;span class=&quot;o&quot;&gt;]]&lt;/span&gt;
+  NoMethodError: undefined method &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;title&lt;span class=&quot;err&quot;&gt;&amp;#39;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; nil:NilClass&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;The cause of the error is that the parent record no longer exists, but the foreign key still references the parent object.
+To stop this from happening you can use the dependent option with &lt;code&gt;has_many&lt;/code&gt; and &lt;code&gt;has_one&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h1&gt;Dependent Options&lt;/h1&gt;
+
+&lt;p&gt;Dependent simply tells destroy what to do with child records. The available dependent options are as follows:&lt;/p&gt;
+
+&lt;h2&gt;Destroy&lt;/h2&gt;
+
+&lt;p&gt;The destroy option is the most common in a Rails app, as it is the most likely scenario. For example, when you delete a post, you probably want to remove the comments as well.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Post&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;ActiveRecord&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Base&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;has_many&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:comments&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;dependent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:destroy&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Comment&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;ActiveRecord&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Base&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;belongs_to&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:post&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;after_destroy&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Callback Fired&amp;quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Now when you delete the post the comments are also deleted. Any callback&amp;#39;s that are defined will also be fired.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;2.1.2 :004 &amp;gt; p.destroy
+   &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;0.1ms&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;  BEGIN
+  Comment Load &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;0.3ms&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;  SELECT &lt;span class=&quot;s2&quot;&gt;&amp;quot;comments&amp;quot;&lt;/span&gt;.* FROM &lt;span class=&quot;s2&quot;&gt;&amp;quot;comments&amp;quot;&lt;/span&gt;  WHERE &lt;span class=&quot;s2&quot;&gt;&amp;quot;comments&amp;quot;&lt;/span&gt;.&lt;span class=&quot;s2&quot;&gt;&amp;quot;post_id&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$1&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;[[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;post_id&amp;quot;&lt;/span&gt;, 18&lt;span class=&quot;o&quot;&gt;]]&lt;/span&gt;
+  SQL &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;0.2ms&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;  DELETE FROM &lt;span class=&quot;s2&quot;&gt;&amp;quot;comments&amp;quot;&lt;/span&gt; WHERE &lt;span class=&quot;s2&quot;&gt;&amp;quot;comments&amp;quot;&lt;/span&gt;.&lt;span class=&quot;s2&quot;&gt;&amp;quot;id&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$1&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;[[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;id&amp;quot;&lt;/span&gt;, 26&lt;span class=&quot;o&quot;&gt;]]&lt;/span&gt;
+Callback Fired
+  SQL &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;0.2ms&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;  DELETE FROM &lt;span class=&quot;s2&quot;&gt;&amp;quot;comments&amp;quot;&lt;/span&gt; WHERE &lt;span class=&quot;s2&quot;&gt;&amp;quot;comments&amp;quot;&lt;/span&gt;.&lt;span class=&quot;s2&quot;&gt;&amp;quot;id&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$1&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;[[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;id&amp;quot;&lt;/span&gt;, 27&lt;span class=&quot;o&quot;&gt;]]&lt;/span&gt;
+Callback Fired
+  SQL &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;0.2ms&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;  DELETE FROM &lt;span class=&quot;s2&quot;&gt;&amp;quot;posts&amp;quot;&lt;/span&gt; WHERE &lt;span class=&quot;s2&quot;&gt;&amp;quot;posts&amp;quot;&lt;/span&gt;.&lt;span class=&quot;s2&quot;&gt;&amp;quot;id&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$1&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;[[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;id&amp;quot;&lt;/span&gt;, 18&lt;span class=&quot;o&quot;&gt;]]&lt;/span&gt;
+   &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;1.6ms&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;  &lt;span class=&quot;nv&quot;&gt;COMMIT&lt;/span&gt;
+ &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&amp;gt; &lt;span class=&quot;c&quot;&gt;#&amp;lt;Post id: 18, title: &amp;quot;Post 101&amp;quot;, body: nil, created_at: &amp;quot;2015-02-07 16:42:13&amp;quot;, updated_at: &amp;quot;2015-02-07 16:42:13&amp;quot;&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;The destroy option should be a default in Rails because of the ethos of convention over configuration. Currently what happens is the child record doesn&amp;#39;t have its foreign key nullified, which is the next option we will look at.&lt;/p&gt;
+
+&lt;p&gt;I don&amp;#39;t think we could change this default now as it would cause unexpected behaviors when updating to a new Rails version.&lt;/p&gt;
+
+&lt;h2&gt;Nullify&lt;/h2&gt;
+
+&lt;p&gt;Nullify is the opposite to destroy, it means the child record is not destroyed after Active Record removes the parent. Curiously, not that many developers seem to know that this option exist.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Post&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;ActiveRecord&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Base&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;has_many&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:comments&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;dependent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:nullify&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Now when you delete the post the comment is not deleted. Instead the foreign key is set to Null.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;.1.2 :003 &amp;gt; p.destroy
+  &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;0.2ms&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;  BEGIN
+ Comment Load &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;0.5ms&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;  SELECT &lt;span class=&quot;s2&quot;&gt;&amp;quot;comments&amp;quot;&lt;/span&gt;.* FROM &lt;span class=&quot;s2&quot;&gt;&amp;quot;comments&amp;quot;&lt;/span&gt;  WHERE &lt;span class=&quot;s2&quot;&gt;&amp;quot;comments&amp;quot;&lt;/span&gt;.&lt;span class=&quot;s2&quot;&gt;&amp;quot;post_id&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$1&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;[[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;post_id&amp;quot;&lt;/span&gt;, 3&lt;span class=&quot;o&quot;&gt;]]&lt;/span&gt;
+ SQL &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;0.3ms&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;  DELETE FROM &lt;span class=&quot;s2&quot;&gt;&amp;quot;comments&amp;quot;&lt;/span&gt; WHERE &lt;span class=&quot;s2&quot;&gt;&amp;quot;comments&amp;quot;&lt;/span&gt;.&lt;span class=&quot;s2&quot;&gt;&amp;quot;id&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$1&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;[[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;id&amp;quot;&lt;/span&gt;, 3&lt;span class=&quot;o&quot;&gt;]]&lt;/span&gt;
+ SQL &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;0.2ms&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;  DELETE FROM &lt;span class=&quot;s2&quot;&gt;&amp;quot;posts&amp;quot;&lt;/span&gt; WHERE &lt;span class=&quot;s2&quot;&gt;&amp;quot;posts&amp;quot;&lt;/span&gt;.&lt;span class=&quot;s2&quot;&gt;&amp;quot;id&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$1&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;[[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;id&amp;quot;&lt;/span&gt;, 3&lt;span class=&quot;o&quot;&gt;]]&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;1.7ms&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;  &lt;span class=&quot;nv&quot;&gt;COMMIT&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&amp;gt; &lt;span class=&quot;c&quot;&gt;#&amp;lt;Post id: 3, title: &amp;quot;Post 101&amp;quot;, body: nil, created_at: &amp;quot;2015-01-31 13:01:43&amp;quot;, updated_at: &amp;quot;2015-01-31 13:01:43&amp;quot;&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;This is better than leaving the foreign key set but will still cause an error if you try to access the post.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;2.1.2 :006 &amp;gt; Comment.find&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;4&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;.post.title
+  Comment Load &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;0.5ms&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;  SELECT  &lt;span class=&quot;s2&quot;&gt;&amp;quot;comments&amp;quot;&lt;/span&gt;.* FROM &lt;span class=&quot;s2&quot;&gt;&amp;quot;comments&amp;quot;&lt;/span&gt;  WHERE &lt;span class=&quot;s2&quot;&gt;&amp;quot;comments&amp;quot;&lt;/span&gt;.&lt;span class=&quot;s2&quot;&gt;&amp;quot;id&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$1&lt;/span&gt; LIMIT &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;[[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;id&amp;quot;&lt;/span&gt;, 4&lt;span class=&quot;o&quot;&gt;]]&lt;/span&gt;
+NoMethodError: undefined method &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;title&lt;span class=&quot;err&quot;&gt;&amp;#39;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; nil:NilClass&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2&gt;Delete All&lt;/h2&gt;
+
+&lt;p&gt;The delete all option is the same as destroy but no callbacks will be executed.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Comment&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;ActiveRecord&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Base&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;belongs_to&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:post&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;after_destroy&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Callback Fired&amp;quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Post&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;ActiveRecord&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Base&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;has_many&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:comments&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;dependent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:delete_all&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;2.1.2 :011 &amp;gt; p.destroy
+   &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;0.2ms&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;  BEGIN
+  SQL &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;0.3ms&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;  DELETE FROM &lt;span class=&quot;s2&quot;&gt;&amp;quot;comments&amp;quot;&lt;/span&gt; WHERE &lt;span class=&quot;s2&quot;&gt;&amp;quot;comments&amp;quot;&lt;/span&gt;.&lt;span class=&quot;s2&quot;&gt;&amp;quot;post_id&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$1&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;[[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;post_id&amp;quot;&lt;/span&gt;, 11&lt;span class=&quot;o&quot;&gt;]]&lt;/span&gt;
+  SQL &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;0.3ms&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;  DELETE FROM &lt;span class=&quot;s2&quot;&gt;&amp;quot;posts&amp;quot;&lt;/span&gt; WHERE &lt;span class=&quot;s2&quot;&gt;&amp;quot;posts&amp;quot;&lt;/span&gt;.&lt;span class=&quot;s2&quot;&gt;&amp;quot;id&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$1&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;[[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;id&amp;quot;&lt;/span&gt;, 11&lt;span class=&quot;o&quot;&gt;]]&lt;/span&gt;
+   &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;1.4ms&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;  &lt;span class=&quot;nv&quot;&gt;COMMIT&lt;/span&gt;
+ &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&amp;gt; &lt;span class=&quot;c&quot;&gt;#&amp;lt;Post id: 11, title: &amp;quot;Post 101&amp;quot;, body: nil, created_at: &amp;quot;2015-02-04 08:48:18&amp;quot;, updated_at: &amp;quot;2015-02-04 08:48:18&amp;quot;&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2&gt;Restrict with Exception&lt;/h2&gt;
+
+&lt;p&gt;This is an option that I have to admit I’ve never seen or used before writing this article. Restrict with exception raises an exception when destroy is called on a parent record with children. The parent will only be deleted if the parent doesn&amp;#39;t have associated children.&lt;/p&gt;
+
+&lt;p&gt;I can imagine it to be useful if you wanted to protect against posts with comments being deleted.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Post&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;ActiveRecord&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Base&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;has_many&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:comments&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;dependent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:restrict_with_exception&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;2.1.2 :003 &amp;gt; p.destroy
+   &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;0.2ms&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;  BEGIN
+   &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;2.3ms&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;  ROLLBACK
+ActiveRecord::DeleteRestrictionError: Cannot delete record because of dependent comments&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;As you can see this raises an ActiveRecord::DeleteRestrictionError exception if a comment exists.&lt;/p&gt;
+
+&lt;h2&gt;Restrict with Error&lt;/h2&gt;
+
+&lt;p&gt;The last option is restrict with error which sets an error on the parent record if the parent has child records associated.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Post&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;ActiveRecord&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Base&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;has_many&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:comments&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;dependent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:restrict_with_error&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;2.1.2 :003 &amp;gt; p.destroy
+   &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;0.2ms&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;  BEGIN
+   &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;0.2ms&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;  &lt;span class=&quot;nv&quot;&gt;ROLLBACK&lt;/span&gt;
+ &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&amp;gt; &lt;span class=&quot;nb&quot;&gt;false&lt;/span&gt;
+2.1.2 :004 &amp;gt; p.errors
+ &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&amp;gt; &lt;span class=&quot;c&quot;&gt;#&amp;lt;ActiveModel::Errors:0x000001016a9828 @base=#&amp;lt;Post id: 6, title: &amp;quot;Post 101&amp;quot;, body: nil, created_at: &amp;quot;2015-01-31 13:19:36&amp;quot;, updated_at: &amp;quot;2015-01-31 13:19:36&amp;quot;&amp;gt;, @messages={:base=&amp;gt;[&amp;quot;Cannot delete record because dependent comments exist&amp;quot;]}&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Active Record has added an error to the errors attribute in the same way as a validation error would be added.
+I think this would work well with validations as you can  display this error to the admin trying to delete the post.
+Restrict with error could be a replacement to doing a custom validation rule in less code. The downside you would lose the if/unless functionality available in validation.&lt;/p&gt;
+
+&lt;p&gt;I know that the dependent parameter is not the most exciting thing to read about but knowing the less known features in a framework can save you time when working on your next amazing feature.&lt;/p&gt;
+
+&lt;p&gt;Alex&lt;/p&gt;
+</description>
+        <pubDate>Sat, 31 Jan 2015 09:38:00 +0000</pubDate>
+        <link>/rails-dependent-associations/</link>
+        <guid isPermaLink="true">/rails-dependent-associations/</guid>
       </item>
-    {% endfor %}
+    
+      <item>
+        <title>Dumbfounded</title>
+        <description>&lt;p&gt;A few weeks ago before the temperature got turned up I spent the bank holiday sport climbing in Dorset. I spotted this blank looking face and thought it looked amazing. Dumbfounded - 7b+&lt;/p&gt;
+
+&lt;iframe frameborder=&quot;0&quot; height=&quot;281&quot; src=&quot;//player.vimeo.com/video/95857428&quot; width=&quot;700&quot;&gt;&lt;/iframe&gt;
+</description>
+        <pubDate>Mon, 26 May 2014 10:38:00 +0100</pubDate>
+        <link>/dumbfounded/</link>
+        <guid isPermaLink="true">/dumbfounded/</guid>
+      </item>
+    
+      <item>
+        <title>Rails ProTip: Stop generating empty files you&#39;re not gonna use!</title>
+        <description>&lt;p&gt;I regularly work on projects where there are default pending specs and helpers/assets that are empty. This is bad for two reasons: firstly RSpec and the Asset pipeline still check/load these files which slows things down, and secondly they make the project harder to navigate.&lt;/p&gt;
+
+&lt;p&gt;I recommend adding this too your application.rb today!&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;generators&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;g&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;g&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;test_framework&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:rspec&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;views&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;routes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;false&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;g&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;helper_specs&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;false&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;g&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;stylesheets&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;false&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;g&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;javascripts&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;false&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;g&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;helper&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;false&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+</description>
+        <pubDate>Mon, 20 Jan 2014 09:38:00 +0000</pubDate>
+        <link>/rails-protip-stop-generating-empty-files-you-are/</link>
+        <guid isPermaLink="true">/rails-protip-stop-generating-empty-files-you-are/</guid>
+      </item>
+    
   </channel>
 </rss>
