@@ -5,7 +5,7 @@
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
 
-    <title>Posts Tagged &ldquo;Rails&rdquo; – Alex Handley – Person who codes and climbs for tips</title>
+    <title>Protip: Pasting code in Vim (Updated) – Alex Handley – Person who codes and climbs for tips</title>
 
     <meta name="author" content="Alex Handley" />
     <meta name="description" content="Person who codes and climbs for tips">
@@ -48,96 +48,28 @@
     </div>
 
     <div id="main" role="main" class="container">
-      <h2 class="post_title">Posts Tagged &ldquo;Rails&rdquo;</h2>
-<div class="posts">
-  
-		
-			
-				<article class="post">
+      <article class="post">
+  <h1>Protip: Pasting code in Vim (Updated)</h1>
 
-					<h1><a href="/rails-dependent-associations/">Rails Dependent Associations</a></h1>
+  <div class="entry">
+    <p>On <a href="http://rubyrogues.com/129-rr-sharpening-tools-with-ben-orenstein/" target="_blank">Ruby Rogues</a> a few weeks back, Ben Orenstein mentioned he tries to spend 15 minutes a day improving his workflow and tools. I decided to take this onboard and this week I looked into how to paste code in Vim without loosing its indentation.</p>
+<p>1. Turn off autoindent.</p>
+<div class="highlight"><pre><code class="language-vim" data-lang="vim"><span class="p">:</span><span class="k">set</span> <span class="nb">paste</span></code></pre></div>
+<p>2. Enter insert mode.</p>
+<p>3. Paste code</p>
+<p>4. Turn autoindent back on.</p>
+<div class="highlight"><pre><code class="language-vim" data-lang="vim"><span class="p">:</span><span class="k">set</span> <span class="nb">nopaste</span></code></pre></div>
+<p>I found the solution <a href="http://stackoverflow.com/questions/2514445/turning-off-auto-indent-when-pasting-text-into-vim/2514520#2514520" target="_blank">here</a>.</p>
+<p>Enjoy<br/>Alex</p>
 
-					<div class="entry">
-						I often find that the dependent parameter gets forgotten on projects. This is easy to do if you're new to Rails. When dependent is not set, nothing terrible happens at first… but once you get further into a project you...
-					</div>
+  </div>
 
-					<a href="/rails-dependent-associations/" class="read-more">Read More</a>
-				</article>
-			
-		
-			
-		
-			
-		
-			
-		
-  
-		
-			
-		
-  
-		
-			
-		
-			
-		
-  
-		
-			
-		
-			
-		
-			
-		
-			
-		
-  
-		
-			
-				<article class="post">
+  <div class="date">
+    Written on February  9, 2014
+  </div>
 
-					<h1><a href="/rails-protip-stop-generating-empty-files-you-are/">Rails ProTip: Stop generating empty files you're not gonna use!</a></h1>
-
-					<div class="entry">
-						I regularly work on projects where there are default pending specs and helpers/assets that are empty. This is bad for two reasons: firstly RSpec and the Asset pipeline still check/load these files which slows things down, and secondly they make...
-					</div>
-
-					<a href="/rails-protip-stop-generating-empty-files-you-are/" class="read-more">Read More</a>
-				</article>
-			
-		
-			
-		
-			
-		
   
-		
-			
-		
-			
-		
-			
-		
-  
-		
-			
-		
-  
-		
-			
-		
-			
-		
-			
-		
-  
-		
-			
-		
-			
-		
-  
-</div>
+</article>
 
     </div>
 

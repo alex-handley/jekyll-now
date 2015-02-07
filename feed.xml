@@ -153,6 +153,58 @@ Restrict with error could be a replacement to doing a custom validation rule in 
       </item>
     
       <item>
+        <title>Protip: Pasting code in Vim (Updated)</title>
+        <description>&lt;p&gt;On &lt;a href=&quot;http://rubyrogues.com/129-rr-sharpening-tools-with-ben-orenstein/&quot; target=&quot;_blank&quot;&gt;Ruby Rogues&lt;/a&gt; a few weeks back, Ben Orenstein mentioned he tries to spend 15 minutes a day improving his workflow and tools. I decided to take this onboard and this week I looked into how to paste code in Vim without loosing its indentation.&lt;/p&gt;
+&lt;p&gt;1. Turn off autoindent.&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-vim&quot; data-lang=&quot;vim&quot;&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;set&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;paste&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;2. Enter insert mode.&lt;/p&gt;
+&lt;p&gt;3. Paste code&lt;/p&gt;
+&lt;p&gt;4. Turn autoindent back on.&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-vim&quot; data-lang=&quot;vim&quot;&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;set&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;nopaste&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;I found the solution &lt;a href=&quot;http://stackoverflow.com/questions/2514445/turning-off-auto-indent-when-pasting-text-into-vim/2514520#2514520&quot; target=&quot;_blank&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Enjoy&lt;br/&gt;Alex&lt;/p&gt;
+</description>
+        <pubDate>Sun, 09 Feb 2014 16:22:00 +0000</pubDate>
+        <link>/protip-pasting-code-in-vim/</link>
+        <guid isPermaLink="true">/protip-pasting-code-in-vim/</guid>
+      </item>
+    
+      <item>
+        <title>Rails Performance: The Database</title>
+        <description>&lt;p&gt;&lt;span&gt;My primary toolkit is the Ruby on Rails framework, and I mainly work with applications that have been in production for a while, which usually means they&amp;#8217;re in&lt;/span&gt; need of a little pick-me-up. I thought it would be good to write a mini series about the things I typically look for when developing and maintaining Rails apps.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Picking up a Database&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span&gt;When I start working on an app with history the first thing I do after bundling and running the test suite is create a diagram of the database. This used to take up lots of time because I was doing it by hand, &lt;/span&gt;but recently I have been using &lt;a href=&quot;https://github.com/voormedia/rails-erd&quot; target=&quot;_blank&quot;&gt;rails-erd&lt;/a&gt; to automate the process.&lt;/p&gt;
+&lt;p&gt;Running &amp;#8220;rake erd&amp;#8221; creates a pdf based off the applications models.&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&quot;image&quot; src=&quot;https://31.media.tumblr.com/ef7632013898555a789cbb855304290b/tumblr_inline_mxx4wbeSOL1qbbu12.png&quot;/&gt;&lt;/p&gt;
+&lt;p&gt;This is a massive timesaver but it does take away the process of building the ERD diagram - which is invaluable for pointing out red flags such as associations that are not needed and fields that are no longer used.&lt;/p&gt;
+&lt;p&gt;At secondary school I was lucky enough to take a Oracle certification in database design, and one of the core things we learned was Database Normalisation, which came with a set of guidelines for creating good databases. &lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;The guidelines are broken into stages:&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;First Normal Form (1NF)&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Related data should be grouped into separate tables, there should not be duplicated fields in the same table and each row should have a unique key (Primary Key).&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Second Normal Form (2NF)&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Separate fields into a new table that apply to multiple rows.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;For example: if you have a projects table, the client should be in their own table so that when you update their address you only have to do it in one place, not in 10.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Tables should be related to each other using primary and foreign keys to join the related tables.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Third Normal Form (3NF)&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Ensure the columns in the table are dependent on the primary key.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;For example, if you have a teacher who is part of a department, they should be in separate tables because department is it own entity that can exist even if it hasn&amp;#8217;t got any teachers.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Fourth and Fifth Normal Form (4NF)&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Both fourth and fifth normal form discuss multivalue dependencies, which in Rails-land are Has and belong to many and has many through.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;For example: a skill should not be stored in the same table as a user.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;The Rails framework is pretty good at ensuring that these guidelines are followed, the generators automatically create a primary key, if you use the &lt;a href=&quot;http://api.rubyonrails.org/classes/ActiveRecord/ConnectionAdapters/TableDefinition.html#method-i-references&quot; target=&quot;_blank&quot;&gt;references migration type&lt;/a&gt; it will automagically set up the foreign key relation.&lt;/p&gt;
+&lt;p&gt;These rules are definitely more of a suggestion and in some cases can be ignored if there are good reasons to do so: one example is optimisation. By storing all of a users skills as a serialised array in one field you could speed up a request by removing the need for doing a SQL join.&lt;/p&gt;
+&lt;p&gt;I glossed over some of the finer details, so if you are interested in finding out more on the subject, a great technical paper to read is &lt;a href=&quot;http://www.bkent.net/Doc/simple5.htm&quot; target=&quot;_blank&quot;&gt;A Simple Guide to Five Normal Forms in Relational Database Theory&lt;/a&gt;. If you prefer lighter reading the &lt;a href=&quot;http://databases.about.com/od/specificproducts/a/normalization.htm&quot; target=&quot;_blank&quot;&gt;about&lt;/a&gt; series is pretty good.&lt;/p&gt;
+&lt;p&gt;Alex&lt;/p&gt;
+</description>
+        <pubDate>Mon, 03 Feb 2014 13:15:18 +0000</pubDate>
+        <link>/rails-performance-the-database/</link>
+        <guid isPermaLink="true">/rails-performance-the-database/</guid>
+      </item>
+    
+      <item>
         <title>Rails ProTip: Stop generating empty files you&#39;re not gonna use!</title>
         <description>&lt;p&gt;I regularly work on projects where there are default pending specs and helpers/assets that are empty. This is bad for two reasons: firstly RSpec and the Asset pipeline still check/load these files which slows things down, and secondly they make the project harder to navigate.&lt;/p&gt;
 
@@ -169,6 +221,120 @@ Restrict with error could be a replacement to doing a custom validation rule in 
         <pubDate>Mon, 20 Jan 2014 09:38:00 +0000</pubDate>
         <link>/rails-protip-stop-generating-empty-files-you-are/</link>
         <guid isPermaLink="true">/rails-protip-stop-generating-empty-files-you-are/</guid>
+      </item>
+    
+      <item>
+        <title>Setting up Logwatch to email logs using Gmail</title>
+        <description>&lt;p&gt;I thought I would share this quick guide to setting up sending yesterdays logs without needing to install Sendmail or another heavy weight email client.&lt;/p&gt;
+
+&lt;p&gt;Step 1. Install our lightweight SMTP client.&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;sudo apt-get install ssmtp
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Step 2. Configure our client to talk to Gmail.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;sudo vim /etc/ssmtp/ssmtp.conf&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;The config for Gmail should look like this:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;root&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;YOUR_EMAIL_ADDRESS
+&lt;span class=&quot;nv&quot;&gt;mailhub&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;smtp.gmail.com:587
+&lt;span class=&quot;nv&quot;&gt;rewriteDomain&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;YOUR_EMAIL_DOMAIN
+&lt;span class=&quot;nv&quot;&gt;AuthUser&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;YOUR_USERNAME
+&lt;span class=&quot;nv&quot;&gt;AuthPass&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;YOUR_PASSWORD
+&lt;span class=&quot;nv&quot;&gt;FromLineOverride&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;YES
+&lt;span class=&quot;nv&quot;&gt;UseTLS&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;YES
+&lt;span class=&quot;nv&quot;&gt;UseSTARTTLS&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;YES
+&lt;span class=&quot;nv&quot;&gt;hostname&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;smtp.gmail.com:587&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Step 3. Check your configuration works&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;cat - &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; /usr/sbin/ssmtp -v&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Now press ctrl-d and you should see something like this:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;m&quot;&gt;354&lt;/span&gt; Go ahead l4sm46964373een.13 - gsmtp
+Received: by smtp.gmail.com:587 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;sSMTP sendmail emulation&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; Tue, &lt;span class=&quot;m&quot;&gt;03&lt;/span&gt; Dec &lt;span class=&quot;m&quot;&gt;2013&lt;/span&gt; 14:40:08 +0100
+ From: YOUR_SENDER_EMAIL
+ Date: Tue, &lt;span class=&quot;m&quot;&gt;03&lt;/span&gt; Dec &lt;span class=&quot;m&quot;&gt;2013&lt;/span&gt; 14:40:08 +0100&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;You also should receive an email.&lt;/p&gt;
+
+&lt;p&gt;Step 4. Install Logwatch.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;sudo apt-get install logwatch&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Step 5. Check if logwatch works with ssmtp.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;sudo logwatch --detail high --mailto EMAIL_TO_SEND_TO --range yesterday&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;You should now get an email containing yesterdays logs.
+Last Step! setup a cron task to send your logs every day.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;sudo crontab -e&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Your task should look like this:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# m h dom mon dow command&lt;/span&gt;
+  &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt; * * * logwatch --detail high --mailto EMAIL_TO_SEND_TO --range yesterday&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Enjoy!&lt;/p&gt;
+</description>
+        <pubDate>Tue, 03 Dec 2013 08:49:00 +0000</pubDate>
+        <link>/setting-up-logwatch-to-email-logs-using-gmail/</link>
+        <guid isPermaLink="true">/setting-up-logwatch-to-email-logs-using-gmail/</guid>
+      </item>
+    
+      <item>
+        <title>ProTip: Reactivating iectrl vm&#39;s</title>
+        <description>&lt;p&gt;If you are using &lt;a href=&quot;https://github.com/xdissent/iectrl&quot;&gt;iectrl&lt;/a&gt; to manage your Internet Explorer vm&amp;#8217;s and have had your XP activation expire, you can reactivate by running the command below:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;iectrl&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;reinstall&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;7&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+</description>
+        <pubDate>Fri, 29 Nov 2013 12:23:00 +0000</pubDate>
+        <link>/protip-reactivating-iectrl-vms/</link>
+        <guid isPermaLink="true">/protip-reactivating-iectrl-vms/</guid>
+      </item>
+    
+      <item>
+        <title>A better way to handle SSH keys</title>
+        <description>&lt;p&gt;I pair with quite a lot of developers and one thing I have noticed is most of them only use one SSH keypair for all of their services/servers. This isn&amp;#8217;t the worst security threat out there but it does pose a significant one. Also it is pretty inconvenient if your public key gets stolen like in the recent CircleCi attack as you need to change the keypair on every service you use.&lt;/p&gt;
+&lt;p&gt;A multi key setup is pretty easy to implement:&lt;/p&gt;
+&lt;p&gt;Step 1. Create somewhere to store the key:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;mkdir&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;~&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;/.ssh/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;github&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Step 2. Create the SSH key:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;ssh&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;keygen&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rsa&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;f&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;~&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;/.ssh/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;github&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;id_rsa&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;C&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;github key&amp;quot;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Step 3. Add the key to your SSH config:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;vim&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;~&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;/.ssh/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;config&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;no&quot;&gt;Host&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;github&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;com&lt;/span&gt;
+  &lt;span class=&quot;no&quot;&gt;User&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;git&lt;/span&gt;
+  &lt;span class=&quot;no&quot;&gt;IdentityFile&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;~&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;/.ssh/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;github&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;id_rsa&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;  Note: you don&amp;#8217;t have to include a user.&lt;/p&gt;
+&lt;p&gt;Step 4. Test&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;ssh&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;git&lt;/span&gt;&lt;span class=&quot;vi&quot;&gt;@github&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;com&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+</description>
+        <pubDate>Tue, 12 Nov 2013 14:42:00 +0000</pubDate>
+        <link>/a-better-way-to-handle-ssh-keys/</link>
+        <guid isPermaLink="true">/a-better-way-to-handle-ssh-keys/</guid>
+      </item>
+    
+      <item>
+        <title>Rails tip: Titleize acronyms </title>
+        <description>&lt;p&gt;I ran into a problem whilst trying to titleize a string containing an acronym. For example:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;building an API&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;titleize&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Will output&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;no&quot;&gt;Building&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;An&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Api&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Not exactly what I was after but with a small change to the Inflector class you can define your own acronyms.&lt;/p&gt;
+&lt;p&gt;config/initializers/inflections.rb&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;no&quot;&gt;ActiveSupport&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Inflector&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;inflections&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;inflect&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;inflect&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;acronym&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;API&amp;quot;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Now:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;Building An API&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;titleize&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+</description>
+        <pubDate>Wed, 09 Oct 2013 09:59:00 +0100</pubDate>
+        <link>/rails-tip-titleize-acronyms/</link>
+        <guid isPermaLink="true">/rails-tip-titleize-acronyms/</guid>
       </item>
     
   </channel>
