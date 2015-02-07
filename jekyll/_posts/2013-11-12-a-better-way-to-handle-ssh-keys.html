@@ -1,0 +1,33 @@
+---
+layout: post
+title: A better way to handle SSH keys
+date: '2013-11-12T14:42:00+00:00'
+tags:
+- security
+- ssh
+- Programming
+---
+<p>I pair with quite a lot of developers and one thing I have noticed is most of them only use one SSH keypair for all of their services/servers. This isn&#8217;t the worst security threat out there but it does pose a significant one. Also it is pretty inconvenient if your public key gets stolen like in the recent CircleCi attack as you need to change the keypair on every service you use.</p>
+<p>A multi key setup is pretty easy to implement:</p>
+<p>Step 1. Create somewhere to store the key:</p>
+{% highlight ruby %}
+  mkdir ~/.ssh/github
+{% endhighlight %}
+<p>Step 2. Create the SSH key:</p>
+{% highlight ruby %}
+  ssh-keygen -t rsa -f ~/.ssh/github/id_rsa -C "github key"
+{% endhighlight %}
+<p>Step 3. Add the key to your SSH config:</p>
+{% highlight ruby %}
+  vim ~/.ssh/config
+{% endhighlight %}
+{% highlight ruby %}
+  Host github.com
+  User git
+  IdentityFile ~/.ssh/github/id_rsa
+{% endhighlight %}
+<p>  Note: you don&#8217;t have to include a user.</p>
+<p>Step 4. Test</p>
+{% highlight ruby %}
+  ssh git@github.com
+{% endhighlight %}

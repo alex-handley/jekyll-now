@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
+
+    <title>A better way to handle SSH keys – Alex Handley – Person who codes and climbs for tips</title>
+
+    <meta name="author" content="Alex Handley" />
+    <meta name="description" content="Person who codes and climbs for tips">
+
+    <!--[if lt IE 9]>
+      <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <link rel="stylesheet" type="text/css" href="/style.css" />
+    <link rel="alternate" type="application/rss+xml" title="Alex Handley - Person who codes and climbs for tips" href="/feed.xml" />
+
+    <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
+  </head>
+
+  <body>
+    <div class="wrapper-masthead">
+      <div class="container">
+        <header class="masthead clearfix">
+          <a href="/" class="site-avatar"><img src="https://raw.githubusercontent.com/alex-handley/alex-handley.github.io/master/images/alex.png" /></a>
+
+          <div class="site-info">
+            <h1 class="site-name"><a href="/">Alex Handley</a></h1>
+            <p class="site-description">Person who codes and climbs for tips</p>
+          </div>
+
+          <nav>
+            <!-- <a href="/">Blog</a> -->
+            <!-- <a href="/about">About</a> -->
+          </nav>
+        </header>
+
+				<ul class="filter-nav">
+					<li><a href="/" >All</a></li>
+					<li class="spacer">/</li>
+					<li><a href="/tag/Climbing" >Climbing</a></li>
+					<li class="spacer">/</li>
+					<li><a href="/tag/Programming" >Programming</a></li>
+				</ul>
+      </div>
+    </div>
+
+    <div id="main" role="main" class="container">
+      <article class="post">
+  <h1>A better way to handle SSH keys</h1>
+
+  <div class="entry">
+    <p>I pair with quite a lot of developers and one thing I have noticed is most of them only use one SSH keypair for all of their services/servers. This isn&#8217;t the worst security threat out there but it does pose a significant one. Also it is pretty inconvenient if your public key gets stolen like in the recent CircleCi attack as you need to change the keypair on every service you use.</p>
+<p>A multi key setup is pretty easy to implement:</p>
+<p>Step 1. Create somewhere to store the key:</p>
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">mkdir</span> <span class="o">~</span><span class="sr">/.ssh/</span><span class="n">github</span></code></pre></div>
+<p>Step 2. Create the SSH key:</p>
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">ssh</span><span class="o">-</span><span class="n">keygen</span> <span class="o">-</span><span class="n">t</span> <span class="n">rsa</span> <span class="o">-</span><span class="n">f</span> <span class="o">~</span><span class="sr">/.ssh/</span><span class="n">github</span><span class="o">/</span><span class="n">id_rsa</span> <span class="o">-</span><span class="n">C</span> <span class="s2">&quot;github key&quot;</span></code></pre></div>
+<p>Step 3. Add the key to your SSH config:</p>
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">vim</span> <span class="o">~</span><span class="sr">/.ssh/</span><span class="n">config</span></code></pre></div>
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="no">Host</span> <span class="n">github</span><span class="o">.</span><span class="n">com</span>
+  <span class="no">User</span> <span class="n">git</span>
+  <span class="no">IdentityFile</span> <span class="o">~</span><span class="sr">/.ssh/</span><span class="n">github</span><span class="o">/</span><span class="n">id_rsa</span></code></pre></div>
+<p>  Note: you don&#8217;t have to include a user.</p>
+<p>Step 4. Test</p>
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">ssh</span> <span class="n">git</span><span class="vi">@github</span><span class="o">.</span><span class="n">com</span></code></pre></div>
+
+  </div>
+
+  <div class="date">
+    Written on November 12, 2013
+  </div>
+
+  
+</article>
+
+    </div>
+
+    <div class="wrapper-footer">
+      <div class="container">
+        <footer class="footer">
+          
+
+
+
+<a href="http://github.com/alex-handley"><i class="svg-icon github"></i></a>
+
+
+
+
+<a href="http://twitter.com/alex_handley"><i class="svg-icon twitter"></i></a>
+
+
+        </footer>
+      </div>
+    </div>
+
+    
+
+  </body>
+</html>

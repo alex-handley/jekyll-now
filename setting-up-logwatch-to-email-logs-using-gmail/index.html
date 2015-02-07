@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
+
+    <title>Setting up Logwatch to email logs using Gmail – Alex Handley – Person who codes and climbs for tips</title>
+
+    <meta name="author" content="Alex Handley" />
+    <meta name="description" content="Person who codes and climbs for tips">
+
+    <!--[if lt IE 9]>
+      <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <link rel="stylesheet" type="text/css" href="/style.css" />
+    <link rel="alternate" type="application/rss+xml" title="Alex Handley - Person who codes and climbs for tips" href="/feed.xml" />
+
+    <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
+  </head>
+
+  <body>
+    <div class="wrapper-masthead">
+      <div class="container">
+        <header class="masthead clearfix">
+          <a href="/" class="site-avatar"><img src="https://raw.githubusercontent.com/alex-handley/alex-handley.github.io/master/images/alex.png" /></a>
+
+          <div class="site-info">
+            <h1 class="site-name"><a href="/">Alex Handley</a></h1>
+            <p class="site-description">Person who codes and climbs for tips</p>
+          </div>
+
+          <nav>
+            <!-- <a href="/">Blog</a> -->
+            <!-- <a href="/about">About</a> -->
+          </nav>
+        </header>
+
+				<ul class="filter-nav">
+					<li><a href="/" >All</a></li>
+					<li class="spacer">/</li>
+					<li><a href="/tag/Climbing" >Climbing</a></li>
+					<li class="spacer">/</li>
+					<li><a href="/tag/Programming" >Programming</a></li>
+				</ul>
+      </div>
+    </div>
+
+    <div id="main" role="main" class="container">
+      <article class="post">
+  <h1>Setting up Logwatch to email logs using Gmail</h1>
+
+  <div class="entry">
+    <p>I thought I would share this quick guide to setting up sending yesterdays logs without needing to install Sendmail or another heavy weight email client.</p>
+
+<p>Step 1. Install our lightweight SMTP client.</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">sudo apt-get install ssmtp
+</code></pre></div>
+<p>Step 2. Configure our client to talk to Gmail.</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">sudo vim /etc/ssmtp/ssmtp.conf</code></pre></div>
+
+<p>The config for Gmail should look like this:</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">root</span><span class="o">=</span>YOUR_EMAIL_ADDRESS
+<span class="nv">mailhub</span><span class="o">=</span>smtp.gmail.com:587
+<span class="nv">rewriteDomain</span><span class="o">=</span>YOUR_EMAIL_DOMAIN
+<span class="nv">AuthUser</span><span class="o">=</span>YOUR_USERNAME
+<span class="nv">AuthPass</span><span class="o">=</span>YOUR_PASSWORD
+<span class="nv">FromLineOverride</span><span class="o">=</span>YES
+<span class="nv">UseTLS</span><span class="o">=</span>YES
+<span class="nv">UseSTARTTLS</span><span class="o">=</span>YES
+<span class="nv">hostname</span><span class="o">=</span>smtp.gmail.com:587</code></pre></div>
+
+<p>Step 3. Check your configuration works</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">cat - <span class="p">|</span> /usr/sbin/ssmtp -v</code></pre></div>
+
+<p>Now press ctrl-d and you should see something like this:</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="m">354</span> Go ahead l4sm46964373een.13 - gsmtp
+Received: by smtp.gmail.com:587 <span class="o">(</span>sSMTP sendmail emulation<span class="o">)</span><span class="p">;</span> Tue, <span class="m">03</span> Dec <span class="m">2013</span> 14:40:08 +0100
+ From: YOUR_SENDER_EMAIL
+ Date: Tue, <span class="m">03</span> Dec <span class="m">2013</span> 14:40:08 +0100</code></pre></div>
+
+<p>You also should receive an email.</p>
+
+<p>Step 4. Install Logwatch.</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">sudo apt-get install logwatch</code></pre></div>
+
+<p>Step 5. Check if logwatch works with ssmtp.</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">sudo logwatch --detail high --mailto EMAIL_TO_SEND_TO --range yesterday</code></pre></div>
+
+<p>You should now get an email containing yesterdays logs.
+Last Step! setup a cron task to send your logs every day.</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">sudo crontab -e</code></pre></div>
+
+<p>Your task should look like this:</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># m h dom mon dow command</span>
+  <span class="m">0</span> <span class="m">1</span> * * * logwatch --detail high --mailto EMAIL_TO_SEND_TO --range yesterday</code></pre></div>
+
+<p>Enjoy!</p>
+
+  </div>
+
+  <div class="date">
+    Written on December  3, 2013
+  </div>
+
+  
+</article>
+
+    </div>
+
+    <div class="wrapper-footer">
+      <div class="container">
+        <footer class="footer">
+          
+
+
+
+<a href="http://github.com/alex-handley"><i class="svg-icon github"></i></a>
+
+
+
+
+<a href="http://twitter.com/alex_handley"><i class="svg-icon twitter"></i></a>
+
+
+        </footer>
+      </div>
+    </div>
+
+    
+
+  </body>
+</html>
