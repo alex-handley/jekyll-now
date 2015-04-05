@@ -68,7 +68,7 @@ i.e what is happening in each part, this is helpful for someone reading the code
   &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;The functions could be implemented as classes which will enable you to easily Unit test.&lt;/p&gt;
+&lt;p&gt;The functions could be implemented as classes which will enable you to test in isolation.&lt;/p&gt;
 
 &lt;p&gt;Another solution using a loop is to collect the parts of the block as Lambda&amp;#39;s and then pass them to the block.
 This solution works well when there are lots of pieces of logic such as partial Tire queries when using ElasticSearch.&lt;/p&gt;
