@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
+
+    <title>The bloated Ruby block – Alex Handley – Person who codes and climbs for tips</title>
+
+    <meta name="author" content="Alex Handley" />
+    <meta name="description" content="Person who codes and climbs for tips">
+
+    <!--[if lt IE 9]>
+      <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <link rel="stylesheet" type="text/css" href="/style.css" />
+    <link rel="alternate" type="application/rss+xml" title="Alex Handley - Person who codes and climbs for tips" href="/feed.xml" />
+
+    <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
+  </head>
+
+  <body>
+    <div class="wrapper-masthead">
+      <div class="container">
+        <header class="masthead clearfix">
+          <a href="/" class="site-avatar"><img src="https://raw.githubusercontent.com/alex-handley/alex-handley.github.io/master/images/alex.png" /></a>
+
+          <div class="site-info">
+            <h1 class="site-name"><a href="/">Alex Handley</a></h1>
+            <p class="site-description">Person who codes and climbs for tips</p>
+          </div>
+
+          <nav>
+            <!-- <a href="/">Blog</a> -->
+            <!-- <a href="/about">About</a> -->
+          </nav>
+        </header>
+
+				<ul class="filter-nav">
+					<li><a href="/" >All</a></li>
+					<li class="spacer">/</li>
+					<li><a href="/tag/Climbing" >Climbing</a></li>
+					<li class="spacer">/</li>
+					<li><a href="/tag/Programming" >Programming</a></li>
+				</ul>
+      </div>
+    </div>
+
+    <div id="main" role="main" class="container">
+      <article class="post">
+  <h1>The bloated Ruby block</h1>
+
+  <div class="entry">
+    <p>I am currently spending a month climbing in Spain before I start looking for a new job and in
+the process decided to setup up my old MacBook Pro for the journey.
+While I was moving my files over I found a draft of this blog post.</p>
+
+<p>I remember blocks being confusing when I first started learning Ruby, they seemed alien when compared to my PHP code.
+After a while I got the hang of them and soon my code was littered with these nuggets:</p>
+
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="no">Rack</span><span class="o">::</span><span class="no">Rewrite</span> <span class="k">do</span>
+  <span class="n">r301</span> <span class="s2">&quot;/wiki/alex&quot;</span><span class="p">,</span> <span class="s2">&quot;/alex&quot;</span>
+  <span class="n">rewrite</span> <span class="s2">&quot;/docs/go&quot;</span><span class="p">,</span> <span class="s2">&quot;/documentation/go&quot;</span>
+<span class="k">end</span></code></pre></div>
+
+<p>After a while they started looking like some of my university coursework, lots of code which was hard to read and make changes too.</p>
+
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="no">Rack</span><span class="o">::</span><span class="no">Rewrite</span> <span class="k">do</span>
+  <span class="n">r301</span> <span class="s2">&quot;/wiki/alex&quot;</span><span class="p">,</span> <span class="s2">&quot;/alex&quot;</span>
+  <span class="n">r301</span> <span class="s2">&quot;/wiki/steve&quot;</span><span class="p">,</span> <span class="s2">&quot;/steve&quot;</span>
+  <span class="n">r301</span> <span class="s2">&quot;/wiki/billy&quot;</span><span class="p">,</span> <span class="s2">&quot;/billy&quot;</span>
+  <span class="n">r301</span> <span class="s2">&quot;/wiki/jake&quot;</span><span class="p">,</span> <span class="s2">&quot;/jake&quot;</span>
+
+  <span class="n">rewrite</span> <span class="sr">%r{(.*)}</span><span class="p">,</span> <span class="nb">lambda</span> <span class="k">do</span> <span class="o">|</span><span class="n">match</span><span class="p">,</span> <span class="n">rack_env</span><span class="o">|</span>
+    <span class="k">if</span> <span class="n">match</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">==</span> <span class="s2">&quot;/docs/hipster-js&quot;</span>
+      <span class="s2">&quot;https://www.destroyallsoftware.com/talks/wat&quot;</span>
+    <span class="k">else</span>
+      <span class="k">return</span> <span class="n">match</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+
+   <span class="c1"># This would go on and on...</span>
+<span class="k">end</span></code></pre></div>
+
+<p>One way to improve this is to pull out the logic into functions which helps to give context to the code.
+i.e what is happening in each part, this is helpful for someone reading the code for the first time.</p>
+
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="no">Rack</span><span class="o">::</span><span class="no">Rewrite</span> <span class="k">do</span> <span class="o">|</span><span class="n">t</span><span class="o">|</span>
+  <span class="c1"># The &quot;*&quot; symbol simply flattens the array into the</span>
+  <span class="c1"># separate parameters the method expects.</span>
+  <span class="n">wiki_permanant_redirects</span><span class="o">.</span><span class="n">each</span> <span class="p">{</span> <span class="o">|</span><span class="n">args</span><span class="o">|</span> <span class="n">r301</span> <span class="o">*</span><span class="n">args</span> <span class="p">}</span>
+
+  <span class="n">rewrite</span> <span class="sr">%r{(.*)}</span><span class="p">,</span> <span class="n">redirect_hipster_js_to_wat_talk</span>
+<span class="k">end</span>
+
+<span class="k">def</span> <span class="nf">redirect_hipster_js_to_wat_talk</span>
+  <span class="nb">lambda</span> <span class="k">do</span> <span class="o">|</span><span class="n">match</span><span class="p">,</span> <span class="n">rack_env</span><span class="o">|</span>
+    <span class="k">if</span> <span class="n">match</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">==</span> <span class="s2">&quot;/docs/hipster-js&quot;</span>
+      <span class="s2">&quot;https://www.destroyallsoftware.com/talks/wat&quot;</span>
+    <span class="k">else</span>
+      <span class="k">return</span> <span class="n">match</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="k">def</span> <span class="nf">wiki_permanant_redirects</span>
+  <span class="n">wiki_users</span> <span class="o">=</span> <span class="o">[</span><span class="s2">&quot;alex&quot;</span><span class="p">,</span> <span class="s2">&quot;steve&quot;</span><span class="p">,</span> <span class="s2">&quot;billy&quot;</span><span class="p">,</span> <span class="s2">&quot;jake&quot;</span><span class="o">]</span>
+
+  <span class="n">wiki_users</span><span class="o">.</span><span class="n">collect</span> <span class="k">do</span> <span class="o">|</span><span class="n">user</span><span class="o">|</span>
+    <span class="o">[</span><span class="s2">&quot;/wiki/</span><span class="si">#{</span><span class="n">user</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;/</span><span class="si">#{</span><span class="n">user</span><span class="si">}</span><span class="s2">&quot;</span><span class="o">]</span>
+  <span class="k">end</span>
+<span class="k">end</span></code></pre></div>
+
+<p>The functions could be implemented as classes which will enable you to easily Unit test.</p>
+
+<p>Another solution using a loop is to collect the parts of the block as Lambda&#39;s and then pass them to the block.
+This solution works well when there are lots of pieces of logic such as partial Tire queries when using ElasticSearch.</p>
+
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">tags</span> <span class="o">=</span> <span class="o">[</span><span class="s2">&quot;ruby&quot;</span><span class="p">,</span> <span class="s2">&quot;java&quot;</span><span class="p">,</span> <span class="s2">&quot;python&quot;</span><span class="o">]</span>
+<span class="n">partial_queries</span> <span class="o">=</span> <span class="n">tags</span><span class="o">.</span><span class="n">collect</span> <span class="k">do</span> <span class="o">|</span><span class="n">tag</span><span class="o">|</span>
+  <span class="nb">lambda</span> <span class="k">do</span> <span class="o">|</span><span class="n">boolean</span><span class="o">|</span>
+    <span class="n">boolean</span> <span class="s2">&quot;tags:</span><span class="si">#{</span><span class="n">tag</span><span class="si">}</span><span class="s2">&quot;</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="no">Tire</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s2">&quot;articles&quot;</span><span class="p">)</span> <span class="k">do</span>
+  <span class="n">query</span> <span class="k">do</span>
+    <span class="n">boolean</span> <span class="k">do</span>
+      <span class="n">partial_queries</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">partial_query</span><span class="o">|</span>
+        <span class="n">boolean</span> <span class="o">&amp;</span><span class="n">partial_query</span>
+      <span class="k">end</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span></code></pre></div>
+
+<p>** I am not able to test the above code as the Internet here isn&#39;t good enough to download ElasticSearch.</p>
+
+<p>I like this way of structuring blocks when I know it is going to grow quickly. e.g. when building a complex search.</p>
+
+<p>Because you can continue to grow out the number of query parameters and isolate complex logic to enable easy testing.
+As with the first example, classes can be used to group similar logic such as tags and word searches within articles in this example.</p>
+
+<p>At the same time if the search is basic this would be massively overkill and would make the code hard to read.</p>
+
+<p>Hope this helps someone with a bloated block problem :)</p>
+
+<p><img src="/images/post_images/blocks_office.png" alt="View from Siurana Campsite"></p>
+
+<p>My office view.</p>
+
+  </div>
+
+  <div class="date">
+    Written on April  1, 2015
+  </div>
+
+  
+</article>
+
+    </div>
+
+    <div class="wrapper-footer">
+      <div class="container">
+        <footer class="footer">
+          
+
+
+
+<a href="http://github.com/alex-handley"><i class="svg-icon github"></i></a>
+
+
+
+
+<a href="http://twitter.com/alex_handley"><i class="svg-icon twitter"></i></a>
+
+
+        </footer>
+      </div>
+    </div>
+
+    
+
+  </body>
+</html>

@@ -7,6 +7,110 @@
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml" />
     
       <item>
+        <title>The bloated Ruby block</title>
+        <description>&lt;p&gt;I am currently spending a month climbing in Spain before I start looking for a new job and in
+the process decided to setup up my old MacBook Pro for the journey.
+While I was moving my files over I found a draft of this blog post.&lt;/p&gt;
+
+&lt;p&gt;I remember blocks being confusing when I first started learning Ruby, they seemed alien when compared to my PHP code.
+After a while I got the hang of them and soon my code was littered with these nuggets:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;no&quot;&gt;Rack&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Rewrite&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;r301&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;/wiki/alex&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;/alex&amp;quot;&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;rewrite&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;/docs/go&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;/documentation/go&amp;quot;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;After a while they started looking like some of my university coursework, lots of code which was hard to read and make changes too.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;no&quot;&gt;Rack&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Rewrite&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;r301&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;/wiki/alex&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;/alex&amp;quot;&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;r301&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;/wiki/steve&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;/steve&amp;quot;&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;r301&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;/wiki/billy&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;/billy&amp;quot;&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;r301&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;/wiki/jake&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;/jake&amp;quot;&lt;/span&gt;
+
+  &lt;span class=&quot;n&quot;&gt;rewrite&lt;/span&gt; &lt;span class=&quot;sr&quot;&gt;%r{(.*)}&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;lambda&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;match&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rack_env&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;match&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;/docs/hipster-js&amp;quot;&lt;/span&gt;
+      &lt;span class=&quot;s2&quot;&gt;&amp;quot;https://www.destroyallsoftware.com/talks/wat&amp;quot;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;match&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+
+   &lt;span class=&quot;c1&quot;&gt;# This would go on and on...&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;One way to improve this is to pull out the logic into functions which helps to give context to the code.
+i.e what is happening in each part, this is helpful for someone reading the code for the first time.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;no&quot;&gt;Rack&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Rewrite&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;# The &amp;quot;*&amp;quot; symbol simply flattens the array into the&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;# separate parameters the method expects.&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;wiki_permanant_redirects&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;each&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;r301&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;args&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+  &lt;span class=&quot;n&quot;&gt;rewrite&lt;/span&gt; &lt;span class=&quot;sr&quot;&gt;%r{(.*)}&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;redirect_hipster_js_to_wat_talk&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;redirect_hipster_js_to_wat_talk&lt;/span&gt;
+  &lt;span class=&quot;nb&quot;&gt;lambda&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;match&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rack_env&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;match&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;/docs/hipster-js&amp;quot;&lt;/span&gt;
+      &lt;span class=&quot;s2&quot;&gt;&amp;quot;https://www.destroyallsoftware.com/talks/wat&amp;quot;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;match&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;wiki_permanant_redirects&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;wiki_users&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;alex&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;steve&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;billy&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;jake&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
+
+  &lt;span class=&quot;n&quot;&gt;wiki_users&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;collect&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;/wiki/&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;/&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;The functions could be implemented as classes which will enable you to easily Unit test.&lt;/p&gt;
+
+&lt;p&gt;Another solution using a loop is to collect the parts of the block as Lambda&amp;#39;s and then pass them to the block.
+This solution works well when there are lots of pieces of logic such as partial Tire queries when using ElasticSearch.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;tags&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;ruby&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;java&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;python&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;partial_queries&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tags&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;collect&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tag&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+  &lt;span class=&quot;nb&quot;&gt;lambda&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;boolean&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;boolean&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;tags:&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tag&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+
+&lt;span class=&quot;no&quot;&gt;Tire&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;search&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;articles&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;query&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;boolean&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;partial_queries&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;each&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;partial_query&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;boolean&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;partial_query&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;** I am not able to test the above code as the Internet here isn&amp;#39;t good enough to download ElasticSearch.&lt;/p&gt;
+
+&lt;p&gt;I like this way of structuring blocks when I know it is going to grow quickly. e.g. when building a complex search.&lt;/p&gt;
+
+&lt;p&gt;Because you can continue to grow out the number of query parameters and isolate complex logic to enable easy testing.
+As with the first example, classes can be used to group similar logic such as tags and word searches within articles in this example.&lt;/p&gt;
+
+&lt;p&gt;At the same time if the search is basic this would be massively overkill and would make the code hard to read.&lt;/p&gt;
+
+&lt;p&gt;Hope this helps someone with a bloated block problem :)&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/post_images/blocks_office.png&quot; alt=&quot;View from Siurana Campsite&quot;&gt;&lt;/p&gt;
+
+&lt;p&gt;My office view.&lt;/p&gt;
+</description>
+        <pubDate>Wed, 01 Apr 2015 11:38:00 +0200</pubDate>
+        <link>/ruby-blocks/</link>
+        <guid isPermaLink="true">/ruby-blocks/</guid>
+      </item>
+    
+      <item>
         <title>Rails Dependent Associations</title>
         <description>&lt;p&gt;I often find that the dependent parameter gets forgotten on projects. This is easy to do if you&amp;#39;re new to Rails. When dependent is not set, nothing terrible happens at first… but once you get further into a project you will start seeing this:&lt;/p&gt;
 
@@ -136,7 +240,7 @@ Restrict with error could be a replacement to doing a custom validation rule in 
 
 &lt;p&gt;Alex&lt;/p&gt;
 </description>
-        <pubDate>Sat, 31 Jan 2015 09:38:00 +0000</pubDate>
+        <pubDate>Sat, 31 Jan 2015 10:38:00 +0100</pubDate>
         <link>/rails-dependent-associations/</link>
         <guid isPermaLink="true">/rails-dependent-associations/</guid>
       </item>
@@ -147,7 +251,7 @@ Restrict with error could be a replacement to doing a custom validation rule in 
 
 &lt;iframe frameborder=&quot;0&quot; height=&quot;281&quot; src=&quot;//player.vimeo.com/video/95857428&quot; width=&quot;700&quot;&gt;&lt;/iframe&gt;
 </description>
-        <pubDate>Mon, 26 May 2014 10:38:00 +0100</pubDate>
+        <pubDate>Mon, 26 May 2014 11:38:00 +0200</pubDate>
         <link>/dumbfounded/</link>
         <guid isPermaLink="true">/dumbfounded/</guid>
       </item>
@@ -164,7 +268,7 @@ Restrict with error could be a replacement to doing a custom validation rule in 
 &lt;p&gt;I found the solution &lt;a href=&quot;http://stackoverflow.com/questions/2514445/turning-off-auto-indent-when-pasting-text-into-vim/2514520#2514520&quot; target=&quot;_blank&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Enjoy&lt;br/&gt;Alex&lt;/p&gt;
 </description>
-        <pubDate>Sun, 09 Feb 2014 16:22:00 +0000</pubDate>
+        <pubDate>Sun, 09 Feb 2014 17:22:00 +0100</pubDate>
         <link>/protip-pasting-code-in-vim/</link>
         <guid isPermaLink="true">/protip-pasting-code-in-vim/</guid>
       </item>
@@ -199,7 +303,7 @@ Restrict with error could be a replacement to doing a custom validation rule in 
 &lt;p&gt;I glossed over some of the finer details, so if you are interested in finding out more on the subject, a great technical paper to read is &lt;a href=&quot;http://www.bkent.net/Doc/simple5.htm&quot; target=&quot;_blank&quot;&gt;A Simple Guide to Five Normal Forms in Relational Database Theory&lt;/a&gt;. If you prefer lighter reading the &lt;a href=&quot;http://databases.about.com/od/specificproducts/a/normalization.htm&quot; target=&quot;_blank&quot;&gt;about&lt;/a&gt; series is pretty good.&lt;/p&gt;
 &lt;p&gt;Alex&lt;/p&gt;
 </description>
-        <pubDate>Mon, 03 Feb 2014 13:15:18 +0000</pubDate>
+        <pubDate>Mon, 03 Feb 2014 14:15:18 +0100</pubDate>
         <link>/rails-performance-the-database/</link>
         <guid isPermaLink="true">/rails-performance-the-database/</guid>
       </item>
@@ -218,7 +322,7 @@ Restrict with error could be a replacement to doing a custom validation rule in 
   &lt;span class=&quot;n&quot;&gt;g&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;helper&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;false&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 </description>
-        <pubDate>Mon, 20 Jan 2014 09:38:00 +0000</pubDate>
+        <pubDate>Mon, 20 Jan 2014 10:38:00 +0100</pubDate>
         <link>/rails-protip-stop-generating-empty-files-you-are/</link>
         <guid isPermaLink="true">/rails-protip-stop-generating-empty-files-you-are/</guid>
       </item>
@@ -279,7 +383,7 @@ Last Step! setup a cron task to send your logs every day.&lt;/p&gt;
 
 &lt;p&gt;Enjoy!&lt;/p&gt;
 </description>
-        <pubDate>Tue, 03 Dec 2013 08:49:00 +0000</pubDate>
+        <pubDate>Tue, 03 Dec 2013 09:49:00 +0100</pubDate>
         <link>/setting-up-logwatch-to-email-logs-using-gmail/</link>
         <guid isPermaLink="true">/setting-up-logwatch-to-email-logs-using-gmail/</guid>
       </item>
@@ -290,7 +394,7 @@ Last Step! setup a cron task to send your logs every day.&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;iectrl&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;reinstall&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;7&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 </description>
-        <pubDate>Fri, 29 Nov 2013 12:23:00 +0000</pubDate>
+        <pubDate>Fri, 29 Nov 2013 13:23:00 +0100</pubDate>
         <link>/protip-reactivating-iectrl-vms/</link>
         <guid isPermaLink="true">/protip-reactivating-iectrl-vms/</guid>
       </item>
@@ -312,7 +416,7 @@ Last Step! setup a cron task to send your logs every day.&lt;/p&gt;
 &lt;p&gt;Step 4. Test&lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;ssh&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;git&lt;/span&gt;&lt;span class=&quot;vi&quot;&gt;@github&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;com&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 </description>
-        <pubDate>Tue, 12 Nov 2013 14:42:00 +0000</pubDate>
+        <pubDate>Tue, 12 Nov 2013 15:42:00 +0100</pubDate>
         <link>/a-better-way-to-handle-ssh-keys/</link>
         <guid isPermaLink="true">/a-better-way-to-handle-ssh-keys/</guid>
       </item>
@@ -332,7 +436,7 @@ Last Step! setup a cron task to send your logs every day.&lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;Building An API&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;titleize&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 </description>
-        <pubDate>Wed, 09 Oct 2013 09:59:00 +0100</pubDate>
+        <pubDate>Wed, 09 Oct 2013 10:59:00 +0200</pubDate>
         <link>/rails-tip-titleize-acronyms/</link>
         <guid isPermaLink="true">/rails-tip-titleize-acronyms/</guid>
       </item>
