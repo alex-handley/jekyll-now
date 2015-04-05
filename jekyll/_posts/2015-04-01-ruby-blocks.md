@@ -73,7 +73,7 @@ def wiki_permanant_redirects
 end
 {% endhighlight %}
 
-The functions could be implemented as classes which will enable you to easily Unit test.
+The functions could be implemented as classes which will enable you to test in isolation.
 
 Another solution using a loop is to collect the parts of the block as Lambda's and then pass them to the block.
 This solution works well when there are lots of pieces of logic such as partial Tire queries when using ElasticSearch.
