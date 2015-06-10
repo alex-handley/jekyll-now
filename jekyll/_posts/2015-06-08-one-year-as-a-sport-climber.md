@@ -64,4 +64,6 @@ My current triangle looks like this bofore I made it I spent quite a lot of time
 
 Working Leer of Beethoven - 7B+
 
-closing comments
+Hopefully some of these notes help someone improve their climbing!
+
+Alex
