@@ -7,6 +7,52 @@
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml" />
     
       <item>
+        <title>One year as a Sport Climber - Part 1</title>
+        <description>&lt;p&gt;This past year I have started Sport climbing again after switching to bouldering over two years ago, at the time I had just done my first 7A at Cheedale. When I look back on it I think I mainly muscled through it without really using any technique or strategy.&lt;/p&gt;
+
+&lt;p&gt;During this current stint I have spent quite a bit of time reading about training and strategy and this has massively paid off. I have gone from flashing 6C to flashing over 8 7A&amp;#39;s and bringing my redpoint up to 7B+. I wanted to reflect on what made the difference to my climbing as I don&amp;#39;t think I am any stronger, I still climb about V6 or V7 on a good day so over the next few posts I am going to talk about some of the things I have learn / think I have learnt.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/post_images/beethoven.jpg&quot; alt=&quot;Leer of Beethoven&quot;&gt;&lt;/p&gt;
+
+&lt;p&gt;Working Leer of Beethoven - 7B+&lt;/p&gt;
+
+&lt;p&gt;The first post is going to go over how my training has changed over the past year. After my first few sport climbing trip it quickly became apparent that strength wasn&amp;#39;t a problem it was inability to recover and my endurance through long easier sequences. Around this time I started reading &lt;a href=&quot;http://rockclimberstrainingmanual.com/&quot; target=&quot;_blank&quot;&gt;The Climbers Training Manual&lt;/a&gt; which was a great introduction to training the different attributes which make up a good climber (base fitness, strength, power and power endurance).&lt;/p&gt;
+
+&lt;p&gt;The manual introduced me to structured training which is something I was missing for a long time, instead I would go to the gym do some exercies I had read about online and then probably see some gains but stop to early or over train and get injured. With structured training you are following a programme which ensures you satisfy each of the spinning plates mentioned above.
+Another advantage of training in a structured way is you are optimising the time you spend training which means less time can achieve better results.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/post_images/siurana.jpg&quot; alt=&quot;Climbing in Siurana&quot;&gt;&lt;/p&gt;
+
+&lt;p&gt;The best crag in the world? Siuranella Centre, Siurana.&lt;/p&gt;
+
+&lt;p&gt;In March I got the chance to climb in Siurana, while there we all started keeping notes of the routes we had done as we were sharing one guide book between six people. After the trip I carried this on for all my climbing/training sessions which I think gives some retrospection on what worked well and also why you had a bad session e.g. you skipped lunch.&lt;/p&gt;
+
+&lt;p&gt;The training manual also recommends grade triangles which I have seen in a few other articles, I think using this as a boardgame where if you haven&amp;#39;t climbed a 7A+ sieging a 7B+ for months is a waste of time(trust me I have tried) as you will learn a lot by climbing each of those 7A&amp;#39;s.&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;                                  7C
+                               7B/+ 7B/+
+                              7A+ 7A+ 7A+
+                            7A 7A 7A 7A 7A 7A
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;My current triangle looks like this, before I made it I spent quite a lot of time working 7B+&amp;#39;s which were at my limit and this meant I was not getting any short term gratification or improving my technique. Fast forward 8 months and spending my time on those easier routes has paid off as I have climbed two 7B+ each in a session.&lt;/p&gt;
+
+&lt;h2&gt;In summary&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Look at structured training, these two sites are great - &lt;a href=&quot;http://rockclimberstrainingmanual.com/&quot; target=&quot;_blank&quot;&gt;The Climbers Training Manual&lt;/a&gt; and &lt;a href=&quot;http://www.stevemaischtraining.com&quot; target=&quot;_blank&quot;&gt;Steve Maisch Training&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;Keep a training diary.&lt;/li&gt;
+&lt;li&gt;Set long and short term goals.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Hopefully some of these notes help someone improve their climbing!&lt;/p&gt;
+
+&lt;p&gt;Alex&lt;/p&gt;
+</description>
+        <pubDate>Mon, 08 Jun 2015 10:38:00 +0100</pubDate>
+        <link>/one-year-as-a-sport-climber_part1/</link>
+        <guid isPermaLink="true">/one-year-as-a-sport-climber_part1/</guid>
+      </item>
+    
+      <item>
         <title>One year as a Sport Climber</title>
         <description>&lt;p&gt;For the past year I have been mainly sport climbing in the process of making this shift I have started to notice I have started to get over the plateau I was in.&lt;/p&gt;
 
@@ -64,7 +110,9 @@ I find that if you are tired or have other things on you&amp;#39;re mind the gam
 
 &lt;p&gt;Working Leer of Beethoven - 7B+&lt;/p&gt;
 
-&lt;p&gt;closing comments&lt;/p&gt;
+&lt;p&gt;Hopefully some of these notes help someone improve their climbing!&lt;/p&gt;
+
+&lt;p&gt;Alex&lt;/p&gt;
 </description>
         <pubDate>Mon, 08 Jun 2015 10:38:00 +0100</pubDate>
         <link>/one-year-as-a-sport-climber/</link>
@@ -462,28 +510,6 @@ Last Step! setup a cron task to send your logs every day.&lt;/p&gt;
         <pubDate>Fri, 29 Nov 2013 12:23:00 +0000</pubDate>
         <link>/protip-reactivating-iectrl-vms/</link>
         <guid isPermaLink="true">/protip-reactivating-iectrl-vms/</guid>
-      </item>
-    
-      <item>
-        <title>A better way to handle SSH keys</title>
-        <description>&lt;p&gt;I pair with quite a lot of developers and one thing I have noticed is most of them only use one SSH keypair for all of their services/servers. This isn&amp;#8217;t the worst security threat out there but it does pose a significant one. Also it is pretty inconvenient if your public key gets stolen like in the recent CircleCi attack as you need to change the keypair on every service you use.&lt;/p&gt;
-&lt;p&gt;A multi key setup is pretty easy to implement:&lt;/p&gt;
-&lt;p&gt;Step 1. Create somewhere to store the key:&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;mkdir&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;~&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;/.ssh/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;github&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Step 2. Create the SSH key:&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;ssh&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;keygen&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rsa&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;f&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;~&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;/.ssh/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;github&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;id_rsa&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;C&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;github key&amp;quot;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Step 3. Add the key to your SSH config:&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;vim&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;~&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;/.ssh/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;config&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;no&quot;&gt;Host&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;github&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;com&lt;/span&gt;
-  &lt;span class=&quot;no&quot;&gt;User&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;git&lt;/span&gt;
-  &lt;span class=&quot;no&quot;&gt;IdentityFile&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;~&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;/.ssh/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;github&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;id_rsa&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;  Note: you don&amp;#8217;t have to include a user.&lt;/p&gt;
-&lt;p&gt;Step 4. Test&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;ssh&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;git&lt;/span&gt;&lt;span class=&quot;vi&quot;&gt;@github&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;com&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-</description>
-        <pubDate>Tue, 12 Nov 2013 14:42:00 +0000</pubDate>
-        <link>/a-better-way-to-handle-ssh-keys/</link>
-        <guid isPermaLink="true">/a-better-way-to-handle-ssh-keys/</guid>
       </item>
     
   </channel>
