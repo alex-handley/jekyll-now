@@ -52,24 +52,26 @@
   <h1>My first 3 hours on a project</h1>
 
   <div class="entry">
-    <p>I recently started a new full time job which seems a little daunting, for the first time in a long while I am going to be owning this code not just for 3/6 months but for possibly years to come.
-When I first cloned the main app I wanted to get to know what I was going to be working on. Here is what I did:</p>
+    <p>I recently started a new full time job which is a little daunting, for the first time in a long while I am going to be owning this code not just for 3/6 months but for possibly years to come.
+After cloning the codebase, here are some of the things I did:</p>
 
 <h2>Open up the ReadMe</h2>
 
-<p>The ReadMe should hopefully tell you everything from the purpose to its dependencies. Sometimes instead of this you find a description of the framework or placeholders, after much practice I can now not go into full on judgemental mode (this has taken some practice).</p>
+<p>The ReadMe should hopefully tell you everything from the purpose to its dependencies. Sometimes instead of this you find a description of the framework or just placeholders, after much practice I can now not go into full on judgemental mode (this has taken some practice).</p>
 
-<p><img src="/images/post_images/rails_default_readme.png" alt="Rails ERD"></p>
+<p><img src="/images/post_images/rails_default_readme.png" alt="Rails Readme">
+<caption>The worst case, a default Rails Readme</caption></p>
 
 <h2>Open the Gemfile</h2>
 
-<p>The gemfile can act as a harder to read Readme, when the readme is missing. For example if you see the PG gem then it is very likely the project is using PostgreSQL for it&#39;s database adapter. Hopefully the gemfile will also contain version numbers as well so you know immediately if Rails is running an ancient vulnerable version.</p>
+<p>The Gemfile can act as a harder to read Readme when the Readme is missing. For example if you see the PG gem then it is very likely the project is using PostgreSQL for it&#39;s database adapter. Hopefully the Gemfile will also contain version numbers as well so you know immediately if Rails is running an ancient vulnerable version.</p>
 
-<p><img src="/images/post_images/example_gemfile.png" alt="Rails ERD"></p>
+<p><img src="/images/post_images/example_gemfile.png" alt="Rails ERD">
+<caption>A great Gemfile apart from PG not having a version :)</caption></p>
 
 <h2>Get someone else to do the leg work</h2>
 
-<p>I wrote a Gem a while back for the interns at my company, its purpose was to look for the obvious issues that lead to the code style type discussions in a Pull Request.
+<p>I wrote a <a href="https://github.com/alex-handley/schoolmaster">Gem</a> a while back for the interns at my company, its purpose was to look for the obvious issues that lead to the code style type discussions in a Pull Request.
 The gem runs the following tools:</p>
 
 <ul>
@@ -84,13 +86,15 @@ The warnings are really just a guide but can help you get a grasp of the project
 
 <h2>Look at the ERD Diagram</h2>
 
-<p>I don&#39;t always do this but if I want to quickly work out how the database has been designed (or not designed) I install the <a href="https://github.com/voormedia/rails-erd" target="_blank">Rails ERD</a> gem which creates a PDF ERD diagram.</p>
+<p>I don&#39;t always do this but if I want to quickly work out how the database has been designed (or not designed) I install the <a href="https://github.com/voormedia/rails-erd" target="_blank">Rails ERD</a> gem which creates a PDF <a href="https://en.wikipedia.org/wiki/Entity%E2%80%93relationship_model">ERD diagram</a>.</p>
 
-<p><img src="/images/post_images/rake_erd.png" alt="Rails ERD"></p>
+<p><img src="/images/post_images/rake_erd.png" alt="Rails ERD">
+<br />
+<caption>PDF output from Rake ERD</caption></p>
 
 <h2>Take a look at the open Pull Requests</h2>
 
-<p>Looking at the current Pull Request you can see what the team is working on and get a grasp on how
+<p>Looking at the open pull requests you can see what the team is working on and get a grasp on how
 the teams works. For example:</p>
 
 <ul>
@@ -103,14 +107,15 @@ the teams works. For example:</p>
 <h2>Fix a bug</h2>
 
 <p>The last step is to dive in and try and fix something, when a new developer joins the team I normally try and ensure a minor issue/feature is on the board for them.
-This gives the developer a chance to push, get green on CI, create a pull request and then deploy to staging/production. I think this is the best first day a developer can have it really breaks the ice and gets them off on the right direction. Hopefully your team is mature enough to not troll the PR!</p>
+This gives the developer a chance to push, get green on CI, create a pull request and then deploy to staging/production.
+I think this is the best first day a developer can have, it really breaks the ice and gets them off in the right direction, you can even pair on the bug :)</p>
 
-<p>Hope this helps!</p>
+<p>Hopefully your team is mature enough to not troll the PR!</p>
 
   </div>
 
   <div class="date">
-    Written on July 26, 2015
+    Written on September  5, 2015
   </div>
 
   

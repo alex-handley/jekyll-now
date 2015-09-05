@@ -7,6 +7,73 @@
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml" />
     
       <item>
+        <title>My first 3 hours on a project</title>
+        <description>&lt;p&gt;I recently started a new full time job which is a little daunting, for the first time in a long while I am going to be owning this code not just for 3/6 months but for possibly years to come.
+After cloning the codebase, here are some of the things I did:&lt;/p&gt;
+
+&lt;h2&gt;Open up the ReadMe&lt;/h2&gt;
+
+&lt;p&gt;The ReadMe should hopefully tell you everything from the purpose to its dependencies. Sometimes instead of this you find a description of the framework or just placeholders, after much practice I can now not go into full on judgemental mode (this has taken some practice).&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/post_images/rails_default_readme.png&quot; alt=&quot;Rails Readme&quot;&gt;
+&lt;caption&gt;The worst case, a default Rails Readme&lt;/caption&gt;&lt;/p&gt;
+
+&lt;h2&gt;Open the Gemfile&lt;/h2&gt;
+
+&lt;p&gt;The Gemfile can act as a harder to read Readme when the Readme is missing. For example if you see the PG gem then it is very likely the project is using PostgreSQL for it&amp;#39;s database adapter. Hopefully the Gemfile will also contain version numbers as well so you know immediately if Rails is running an ancient vulnerable version.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/post_images/example_gemfile.png&quot; alt=&quot;Rails ERD&quot;&gt;
+&lt;caption&gt;A great Gemfile apart from PG not having a version :)&lt;/caption&gt;&lt;/p&gt;
+
+&lt;h2&gt;Get someone else to do the leg work&lt;/h2&gt;
+
+&lt;p&gt;I wrote a &lt;a href=&quot;https://github.com/alex-handley/schoolmaster&quot;&gt;Gem&lt;/a&gt; a while back for the interns at my company, its purpose was to look for the obvious issues that lead to the code style type discussions in a Pull Request.
+The gem runs the following tools:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Brakeman&lt;/li&gt;
+&lt;li&gt;bundler-audit&lt;/li&gt;
+&lt;li&gt;cane&lt;/li&gt;
+&lt;li&gt;Rails Best practices&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;These tools can give you a rough idea of code quality and if there are any critical issues that need to be solved such as vulnerabilities in gems or SQL injection possibilities.
+The warnings are really just a guide but can help you get a grasp of the project.&lt;/p&gt;
+
+&lt;h2&gt;Look at the ERD Diagram&lt;/h2&gt;
+
+&lt;p&gt;I don&amp;#39;t always do this but if I want to quickly work out how the database has been designed (or not designed) I install the &lt;a href=&quot;https://github.com/voormedia/rails-erd&quot; target=&quot;_blank&quot;&gt;Rails ERD&lt;/a&gt; gem which creates a PDF &lt;a href=&quot;https://en.wikipedia.org/wiki/Entity%E2%80%93relationship_model&quot;&gt;ERD diagram&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/post_images/rake_erd.png&quot; alt=&quot;Rails ERD&quot;&gt;
+&lt;br /&gt;
+&lt;caption&gt;PDF output from Rake ERD&lt;/caption&gt;&lt;/p&gt;
+
+&lt;h2&gt;Take a look at the open Pull Requests&lt;/h2&gt;
+
+&lt;p&gt;Looking at the open pull requests you can see what the team is working on and get a grasp on how
+the teams works. For example:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;PR Labels&lt;/li&gt;
+&lt;li&gt;Branch naming&lt;/li&gt;
+&lt;li&gt;Do they use hound?&lt;/li&gt;
+&lt;li&gt;Is there a CI?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;Fix a bug&lt;/h2&gt;
+
+&lt;p&gt;The last step is to dive in and try and fix something, when a new developer joins the team I normally try and ensure a minor issue/feature is on the board for them.
+This gives the developer a chance to push, get green on CI, create a pull request and then deploy to staging/production.
+I think this is the best first day a developer can have, it really breaks the ice and gets them off in the right direction, you can even pair on the bug :)&lt;/p&gt;
+
+&lt;p&gt;Hopefully your team is mature enough to not troll the PR!&lt;/p&gt;
+</description>
+        <pubDate>Sat, 05 Sep 2015 10:38:00 +0100</pubDate>
+        <link>/first-3-hours-on-project/</link>
+        <guid isPermaLink="true">/first-3-hours-on-project/</guid>
+      </item>
+    
+      <item>
         <title>One year as a Sport Climber - Part 1</title>
         <description>&lt;p&gt;This past year I have started Sport climbing again after switching to bouldering over two years ago, at the time I had just done my first 7A at Cheedale. When I look back on it I think I mainly muscled through it without really using any technique or strategy.&lt;/p&gt;
 
@@ -52,68 +119,6 @@
         <pubDate>Fri, 31 Jul 2015 10:38:00 +0100</pubDate>
         <link>/one-year-as-a-sport-climber_part1/</link>
         <guid isPermaLink="true">/one-year-as-a-sport-climber_part1/</guid>
-      </item>
-    
-      <item>
-        <title>My first 3 hours on a project</title>
-        <description>&lt;p&gt;I recently started a new full time job which seems a little daunting, for the first time in a long while I am going to be owning this code not just for 3/6 months but for possibly years to come.
-When I first cloned the main app I wanted to get to know what I was going to be working on. Here is what I did:&lt;/p&gt;
-
-&lt;h2&gt;Open up the ReadMe&lt;/h2&gt;
-
-&lt;p&gt;The ReadMe should hopefully tell you everything from the purpose to its dependencies. Sometimes instead of this you find a description of the framework or placeholders, after much practice I can now not go into full on judgemental mode (this has taken some practice).&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/post_images/rails_default_readme.png&quot; alt=&quot;Rails ERD&quot;&gt;&lt;/p&gt;
-
-&lt;h2&gt;Open the Gemfile&lt;/h2&gt;
-
-&lt;p&gt;The gemfile can act as a harder to read Readme, when the readme is missing. For example if you see the PG gem then it is very likely the project is using PostgreSQL for it&amp;#39;s database adapter. Hopefully the gemfile will also contain version numbers as well so you know immediately if Rails is running an ancient vulnerable version.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/post_images/example_gemfile.png&quot; alt=&quot;Rails ERD&quot;&gt;&lt;/p&gt;
-
-&lt;h2&gt;Get someone else to do the leg work&lt;/h2&gt;
-
-&lt;p&gt;I wrote a Gem a while back for the interns at my company, its purpose was to look for the obvious issues that lead to the code style type discussions in a Pull Request.
-The gem runs the following tools:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Brakeman&lt;/li&gt;
-&lt;li&gt;bundler-audit&lt;/li&gt;
-&lt;li&gt;cane&lt;/li&gt;
-&lt;li&gt;Rails Best practices&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;These tools can give you a rough idea of code quality and if there are any critical issues that need to be solved such as vulnerabilities in gems or SQL injection possibilities.
-The warnings are really just a guide but can help you get a grasp of the project.&lt;/p&gt;
-
-&lt;h2&gt;Look at the ERD Diagram&lt;/h2&gt;
-
-&lt;p&gt;I don&amp;#39;t always do this but if I want to quickly work out how the database has been designed (or not designed) I install the &lt;a href=&quot;https://github.com/voormedia/rails-erd&quot; target=&quot;_blank&quot;&gt;Rails ERD&lt;/a&gt; gem which creates a PDF ERD diagram.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/post_images/rake_erd.png&quot; alt=&quot;Rails ERD&quot;&gt;&lt;/p&gt;
-
-&lt;h2&gt;Take a look at the open Pull Requests&lt;/h2&gt;
-
-&lt;p&gt;Looking at the current Pull Request you can see what the team is working on and get a grasp on how
-the teams works. For example:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;PR Labels&lt;/li&gt;
-&lt;li&gt;Branch naming&lt;/li&gt;
-&lt;li&gt;Do they use hound?&lt;/li&gt;
-&lt;li&gt;Is there a CI?&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2&gt;Fix a bug&lt;/h2&gt;
-
-&lt;p&gt;The last step is to dive in and try and fix something, when a new developer joins the team I normally try and ensure a minor issue/feature is on the board for them.
-This gives the developer a chance to push, get green on CI, create a pull request and then deploy to staging/production. I think this is the best first day a developer can have it really breaks the ice and gets them off on the right direction. Hopefully your team is mature enough to not troll the PR!&lt;/p&gt;
-
-&lt;p&gt;Hope this helps!&lt;/p&gt;
-</description>
-        <pubDate>Sun, 26 Jul 2015 10:38:00 +0100</pubDate>
-        <link>/first-3-hours-on-project/</link>
-        <guid isPermaLink="true">/first-3-hours-on-project/</guid>
       </item>
     
       <item>
