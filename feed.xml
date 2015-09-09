@@ -7,6 +7,69 @@
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml" />
     
       <item>
+        <title>Missing Emails == Needle in a Haystack</title>
+        <description>&lt;p&gt;I recently joined the Happiness squad at LostMyName and after a few days I was alerted by our customer service staff that some of our customers were not receiving emails.&lt;/p&gt;
+
+&lt;h2&gt;The Problem&lt;/h2&gt;
+
+&lt;p&gt;At first I thought it was just a case of emails going into junk because Mandrill was indicating that the email had been delivered but it quickly became apparent that email were not making it to customers.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/post_images/mandrill-delivered.png&quot; alt=&quot;Mandrill indicating delivered&quot;&gt;
+&lt;br /&gt;
+&lt;caption&gt;Mandrill indicating that the email was delivered successfully&lt;/caption&gt;&lt;/p&gt;
+
+&lt;p&gt;My next step was to contact Mandrill to see if they had any suggestions, their response was that after they get a successful response from the email service provider there job is done.
+Mandrill support suggested contacting the service provider, I wanted to try and avoid this as I knew from experience this would be a nightmare but at this point I had no other ideas so I emailed the spam email account.&lt;/p&gt;
+
+&lt;p&gt;Almost immediately I got a reply from the mail server saying the mailbox was full and could not store the email. Told you so.&lt;/p&gt;
+
+&lt;p&gt;At this point I was completely out of ideas. A colleague suggested that it could be the IP addresses used by Mandrill, I had considered this but had rejected because there were only a few hundred missing emails.&lt;/p&gt;
+
+&lt;h2&gt;The Cause&lt;/h2&gt;
+
+&lt;p&gt;I emailed Mandrill enquiring about the IP addresses and at this point they said that the IP&amp;#39;s were fine, the issue was the status code being sent back by the email provider:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/post_images/550-spam-detected.png&quot; alt=&quot;550 Spam Detected&quot;&gt;
+&lt;caption&gt;Cheers Mandrill...&lt;/caption&gt;&lt;/p&gt;
+
+&lt;p&gt;Mandrill admitted that the response wasn&amp;#39;t getting parsed correctly and because of this emails were incorrectly being shown as delivered.
+Now I knew the issue the actual debugging started, I looked at the email template and decided it was ether the images or the buttons (links inside tables).&lt;/p&gt;
+
+&lt;p&gt;To test this I needed access to an email account on the domain which was hard because it was a French ISP who only gave out accounts to customers. I lucked out and one of the customer services staff dad had an email account and the patience to handle me hounding him.&lt;/p&gt;
+
+&lt;p&gt;After trialling removing different elements I found it was the button. The next experiment was to see if sending test emails with a unstyled link and it worked!&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/post_images/spammy-email.png&quot; alt=&quot;Spam Button&quot;&gt;
+&lt;caption&gt;The problem&lt;/caption&gt;&lt;/p&gt;
+
+&lt;h2&gt;The Solution&lt;/h2&gt;
+
+&lt;p&gt;The problem made perfect sense in hindsight if you read the Mailchimp guide (in references), this button breaks two rules:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Avoid bright red fonts or going crazy with colors.&lt;/li&gt;
+&lt;li&gt;DON’T YELL IN ALL CAPS.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;After changing the colour and removing the CAPS it worked perfectly!&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/post_images/fixed-button.png&quot; alt=&quot;Fixed button&quot;&gt;
+&lt;caption&gt;The Fixed Button&lt;/caption&gt;&lt;/p&gt;
+
+&lt;p&gt;Hope this helps someone.&lt;/p&gt;
+
+&lt;h2&gt;References&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;http://templates.mailchimp.com/concepts/spam-filters/&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Sun, 06 Sep 2015 10:38:00 +0100</pubDate>
+        <link>/needle-in-a-haystack-550-spam-content/</link>
+        <guid isPermaLink="true">/needle-in-a-haystack-550-spam-content/</guid>
+      </item>
+    
+      <item>
         <title>My first 3 hours on a project</title>
         <description>&lt;p&gt;I recently started a new full time job which is a little daunting, for the first time in a long while I am going to be owning this code not just for 3/6 months but for possibly years to come.
 After cloning the codebase, here are some of the things I did:&lt;/p&gt;
@@ -507,67 +570,6 @@ Restrict with error could be a replacement to doing a custom validation rule in 
         <pubDate>Mon, 20 Jan 2014 09:38:00 +0000</pubDate>
         <link>/rails-protip-stop-generating-empty-files-you-are/</link>
         <guid isPermaLink="true">/rails-protip-stop-generating-empty-files-you-are/</guid>
-      </item>
-    
-      <item>
-        <title>Setting up Logwatch to email logs using Gmail</title>
-        <description>&lt;p&gt;I thought I would share this quick guide to setting up sending yesterdays logs without needing to install Sendmail or another heavy weight email client.&lt;/p&gt;
-
-&lt;p&gt;Step 1. Install our lightweight SMTP client.&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;sudo apt-get install ssmtp
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Step 2. Configure our client to talk to Gmail.&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;sudo vim /etc/ssmtp/ssmtp.conf&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;The config for Gmail should look like this:&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;root&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;YOUR_EMAIL_ADDRESS
-&lt;span class=&quot;nv&quot;&gt;mailhub&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;smtp.gmail.com:587
-&lt;span class=&quot;nv&quot;&gt;rewriteDomain&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;YOUR_EMAIL_DOMAIN
-&lt;span class=&quot;nv&quot;&gt;AuthUser&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;YOUR_USERNAME
-&lt;span class=&quot;nv&quot;&gt;AuthPass&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;YOUR_PASSWORD
-&lt;span class=&quot;nv&quot;&gt;FromLineOverride&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;YES
-&lt;span class=&quot;nv&quot;&gt;UseTLS&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;YES
-&lt;span class=&quot;nv&quot;&gt;UseSTARTTLS&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;YES
-&lt;span class=&quot;nv&quot;&gt;hostname&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;smtp.gmail.com:587&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;Step 3. Check your configuration works&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;cat - &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; /usr/sbin/ssmtp -v&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;Now press ctrl-d and you should see something like this:&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;m&quot;&gt;354&lt;/span&gt; Go ahead l4sm46964373een.13 - gsmtp
-Received: by smtp.gmail.com:587 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;sSMTP sendmail emulation&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; Tue, &lt;span class=&quot;m&quot;&gt;03&lt;/span&gt; Dec &lt;span class=&quot;m&quot;&gt;2013&lt;/span&gt; 14:40:08 +0100
- From: YOUR_SENDER_EMAIL
- Date: Tue, &lt;span class=&quot;m&quot;&gt;03&lt;/span&gt; Dec &lt;span class=&quot;m&quot;&gt;2013&lt;/span&gt; 14:40:08 +0100&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;You also should receive an email.&lt;/p&gt;
-
-&lt;p&gt;Step 4. Install Logwatch.&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;sudo apt-get install logwatch&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;Step 5. Check if logwatch works with ssmtp.&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;sudo logwatch --detail high --mailto EMAIL_TO_SEND_TO --range yesterday&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;You should now get an email containing yesterdays logs.
-Last Step! setup a cron task to send your logs every day.&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;sudo crontab -e&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;Your task should look like this:&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# m h dom mon dow command&lt;/span&gt;
-  &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt; * * * logwatch --detail high --mailto EMAIL_TO_SEND_TO --range yesterday&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;Enjoy!&lt;/p&gt;
-</description>
-        <pubDate>Tue, 03 Dec 2013 08:49:00 +0000</pubDate>
-        <link>/setting-up-logwatch-to-email-logs-using-gmail/</link>
-        <guid isPermaLink="true">/setting-up-logwatch-to-email-logs-using-gmail/</guid>
       </item>
     
   </channel>
