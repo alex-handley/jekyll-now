@@ -7,8 +7,8 @@
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml" />
     
       <item>
-        <title>Missing Emails == Needle in a Haystack</title>
-        <description>&lt;p&gt;I recently joined the Happiness squad at LostMyName and after a few days I was alerted by our customer service staff that some of our customers were not receiving emails.&lt;/p&gt;
+        <title>The story of Mandrillus sphinx who needed glasses</title>
+        <description>&lt;p&gt;I recently joined the Happiness squad at LostMyName and after a few days I was alerted by our customer service team that some of our customers were not receiving emails.&lt;/p&gt;
 
 &lt;h2&gt;The Problem&lt;/h2&gt;
 
@@ -33,7 +33,7 @@ Mandrill support suggested contacting the service provider, I wanted to try and 
 &lt;caption&gt;Cheers Mandrill...&lt;/caption&gt;&lt;/p&gt;
 
 &lt;p&gt;Mandrill admitted that the response wasn&amp;#39;t getting parsed correctly and because of this emails were incorrectly being shown as delivered.
-Now I knew the issue the actual debugging started, I looked at the email template and decided it was ether the images or the buttons (links inside tables).&lt;/p&gt;
+Now I knew the issue the actual debugging could start, I looked at the email template and decided it was ether the images or the buttons (links inside tables).&lt;/p&gt;
 
 &lt;p&gt;To test this I needed access to an email account on the domain which was hard because it was a French ISP who only gave out accounts to customers. I lucked out and one of the customer services staff dad had an email account and the patience to handle me hounding him.&lt;/p&gt;
 
@@ -64,9 +64,9 @@ Now I knew the issue the actual debugging started, I looked at the email templat
 &lt;li&gt;http://templates.mailchimp.com/concepts/spam-filters/&lt;/li&gt;
 &lt;/ul&gt;
 </description>
-        <pubDate>Sun, 06 Sep 2015 10:38:00 +0100</pubDate>
-        <link>/needle-in-a-haystack-550-spam-content/</link>
-        <guid isPermaLink="true">/needle-in-a-haystack-550-spam-content/</guid>
+        <pubDate>Thu, 17 Sep 2015 10:38:00 +0100</pubDate>
+        <link>/story-of-mandrillus-sphinx-who-needed-glasses/</link>
+        <guid isPermaLink="true">/story-of-mandrillus-sphinx-who-needed-glasses/</guid>
       </item>
     
       <item>
