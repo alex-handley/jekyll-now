@@ -1,12 +1,12 @@
 ---
 layout: post
-title: Missing Emails == Needle in a Haystack
+title: The story of Mandrillus sphinx who needed glasses
 date: 2015-09-06T09:38:00+00:00
 tags:
 - draft
 ---
 
-I recently joined the Happiness squad at LostMyName and after a few days I was alerted by our customer service staff that some of our customers were not receiving emails.
+I recently joined the Happiness squad at LostMyName and after a few days I was alerted by our customer service team that some of our customers were not receiving emails.
 
 ## The Problem
 
@@ -31,7 +31,7 @@ I emailed Mandrill enquiring about the IP addresses and at this point they said 
 <caption>Cheers Mandrill...</caption>
 
 Mandrill admitted that the response wasn't getting parsed correctly and because of this emails were incorrectly being shown as delivered.
-Now I knew the issue the actual debugging started, I looked at the email template and decided it was ether the images or the buttons (links inside tables).
+Now I knew the issue the actual debugging could start, I looked at the email template and decided it was ether the images or the buttons (links inside tables).
 
 To test this I needed access to an email account on the domain which was hard because it was a French ISP who only gave out accounts to customers. I lucked out and one of the customer services staff dad had an email account and the patience to handle me hounding him.
 
