@@ -54,11 +54,11 @@
   <div class="entry">
     <p>On <a href="http://rubyrogues.com/129-rr-sharpening-tools-with-ben-orenstein/" target="_blank">Ruby Rogues</a> a few weeks back, Ben Orenstein mentioned he tries to spend 15 minutes a day improving his workflow and tools. I decided to take this onboard and this week I looked into how to paste code in Vim without loosing its indentation.</p>
 <p>1. Turn off autoindent.</p>
-<div class="highlight"><pre><code class="language-vim" data-lang="vim"><span class="p">:</span><span class="k">set</span> <span class="nb">paste</span></code></pre></div>
+<figure class="highlight"><pre><code class="language-vim" data-lang="vim">  :<span class="k">set</span> <span class="nb">paste</span></code></pre></figure>
 <p>2. Enter insert mode.</p>
 <p>3. Paste code</p>
 <p>4. Turn autoindent back on.</p>
-<div class="highlight"><pre><code class="language-vim" data-lang="vim"><span class="p">:</span><span class="k">set</span> <span class="nb">nopaste</span></code></pre></div>
+<figure class="highlight"><pre><code class="language-vim" data-lang="vim">  :<span class="k">set</span> <span class="nb">nopaste</span></code></pre></figure>
 <p>I found the solution <a href="http://stackoverflow.com/questions/2514445/turning-off-auto-indent-when-pasting-text-into-vim/2514520#2514520" target="_blank">here</a>.</p>
 <p>Enjoy<br/>Alex</p>
 

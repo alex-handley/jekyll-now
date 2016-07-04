@@ -54,10 +54,10 @@
   <div class="entry">
     <p>I often find that the dependent parameter gets forgotten on projects. This is easy to do if you&#39;re new to Rails. When dependent is not set, nothing terrible happens at first… but once you get further into a project you will start seeing this:</p>
 
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">2.1.2 :013 &gt; Comment.first.post.title
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">2.1.2 :013 &gt; Comment.first.post.title
   Comment Load <span class="o">(</span>0.6ms<span class="o">)</span>  SELECT  <span class="s2">&quot;comments&quot;</span>.* FROM <span class="s2">&quot;comments&quot;</span>   ORDER BY <span class="s2">&quot;comments&quot;</span>.<span class="s2">&quot;id&quot;</span> ASC LIMIT 1
   Post Load <span class="o">(</span>0.3ms<span class="o">)</span>  SELECT  <span class="s2">&quot;posts&quot;</span>.* FROM <span class="s2">&quot;posts&quot;</span>  WHERE <span class="s2">&quot;posts&quot;</span>.<span class="s2">&quot;id&quot;</span> <span class="o">=</span> <span class="nv">$1</span> LIMIT <span class="m">1</span>  <span class="o">[[</span><span class="s2">&quot;id&quot;</span>, 1<span class="o">]]</span>
-  NoMethodError: undefined method <span class="sb">`</span>title<span class="err">&#39;</span> <span class="k">for</span> nil:NilClass</code></pre></div>
+  NoMethodError: undefined method <span class="sb">`</span>title<span class="err">&#39;</span> <span class="k">for</span> nil:NilClass</code></pre></figure>
 
 <p>The cause of the error is that the parent record no longer exists, but the foreign key still references the parent object.
 To stop this from happening you can use the dependent option with <code>has_many</code> and <code>has_one</code>.</p>
@@ -70,18 +70,18 @@ To stop this from happening you can use the dependent option with <code>has_many
 
 <p>The destroy option is the most common in a Rails app, as it is the most likely scenario. For example, when you delete a post, you probably want to remove the comments as well.</p>
 
-<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">class</span> <span class="nc">Post</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">class</span> <span class="nc">Post</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
   <span class="n">has_many</span> <span class="ss">:comments</span><span class="p">,</span> <span class="ss">dependent</span><span class="p">:</span> <span class="ss">:destroy</span>
-<span class="k">end</span></code></pre></div>
+<span class="k">end</span></code></pre></figure>
 
-<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">class</span> <span class="nc">Comment</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">class</span> <span class="nc">Comment</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
   <span class="n">belongs_to</span> <span class="ss">:post</span>
   <span class="n">after_destroy</span> <span class="p">{</span> <span class="nb">puts</span> <span class="s2">&quot;Callback Fired&quot;</span> <span class="p">}</span>
-<span class="k">end</span></code></pre></div>
+<span class="k">end</span></code></pre></figure>
 
 <p>Now when you delete the post the comments are also deleted. Any callback&#39;s that are defined will also be fired.</p>
 
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">2.1.2 :004 &gt; p.destroy
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">2.1.2 :004 &gt; p.destroy
    <span class="o">(</span>0.1ms<span class="o">)</span>  BEGIN
   Comment Load <span class="o">(</span>0.3ms<span class="o">)</span>  SELECT <span class="s2">&quot;comments&quot;</span>.* FROM <span class="s2">&quot;comments&quot;</span>  WHERE <span class="s2">&quot;comments&quot;</span>.<span class="s2">&quot;post_id&quot;</span> <span class="o">=</span> <span class="nv">$1</span>  <span class="o">[[</span><span class="s2">&quot;post_id&quot;</span>, 18<span class="o">]]</span>
   SQL <span class="o">(</span>0.2ms<span class="o">)</span>  DELETE FROM <span class="s2">&quot;comments&quot;</span> WHERE <span class="s2">&quot;comments&quot;</span>.<span class="s2">&quot;id&quot;</span> <span class="o">=</span> <span class="nv">$1</span>  <span class="o">[[</span><span class="s2">&quot;id&quot;</span>, 26<span class="o">]]</span>
@@ -90,7 +90,7 @@ Callback Fired
 Callback Fired
   SQL <span class="o">(</span>0.2ms<span class="o">)</span>  DELETE FROM <span class="s2">&quot;posts&quot;</span> WHERE <span class="s2">&quot;posts&quot;</span>.<span class="s2">&quot;id&quot;</span> <span class="o">=</span> <span class="nv">$1</span>  <span class="o">[[</span><span class="s2">&quot;id&quot;</span>, 18<span class="o">]]</span>
    <span class="o">(</span>1.6ms<span class="o">)</span>  <span class="nv">COMMIT</span>
- <span class="o">=</span>&gt; <span class="c">#&lt;Post id: 18, title: &quot;Post 101&quot;, body: nil, created_at: &quot;2015-02-07 16:42:13&quot;, updated_at: &quot;2015-02-07 16:42:13&quot;&gt;</span></code></pre></div>
+ <span class="o">=</span>&gt; <span class="c">#&lt;Post id: 18, title: &quot;Post 101&quot;, body: nil, created_at: &quot;2015-02-07 16:42:13&quot;, updated_at: &quot;2015-02-07 16:42:13&quot;&gt;</span></code></pre></figure>
 
 <p>The destroy option should be a default in Rails because of the ethos of convention over configuration. Currently what happens is the child record doesn&#39;t have its foreign key nullified, which is the next option we will look at.</p>
 
@@ -100,45 +100,45 @@ Callback Fired
 
 <p>Nullify is the opposite to destroy, it means the child record is not destroyed after Active Record removes the parent. Curiously, not that many developers seem to know that this option exist.</p>
 
-<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">class</span> <span class="nc">Post</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">class</span> <span class="nc">Post</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
   <span class="n">has_many</span> <span class="ss">:comments</span><span class="p">,</span> <span class="ss">dependent</span><span class="p">:</span> <span class="ss">:nullify</span>
-<span class="k">end</span></code></pre></div>
+<span class="k">end</span></code></pre></figure>
 
 <p>Now when you delete the post the comment is not deleted. Instead the foreign key is set to Null.</p>
 
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">.1.2 :003 &gt; p.destroy
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">.1.2 :003 &gt; p.destroy
   <span class="o">(</span>0.2ms<span class="o">)</span>  BEGIN
  Comment Load <span class="o">(</span>0.5ms<span class="o">)</span>  SELECT <span class="s2">&quot;comments&quot;</span>.* FROM <span class="s2">&quot;comments&quot;</span>  WHERE <span class="s2">&quot;comments&quot;</span>.<span class="s2">&quot;post_id&quot;</span> <span class="o">=</span> <span class="nv">$1</span>  <span class="o">[[</span><span class="s2">&quot;post_id&quot;</span>, 3<span class="o">]]</span>
  SQL <span class="o">(</span>0.3ms<span class="o">)</span>  DELETE FROM <span class="s2">&quot;comments&quot;</span> WHERE <span class="s2">&quot;comments&quot;</span>.<span class="s2">&quot;id&quot;</span> <span class="o">=</span> <span class="nv">$1</span>  <span class="o">[[</span><span class="s2">&quot;id&quot;</span>, 3<span class="o">]]</span>
  SQL <span class="o">(</span>0.2ms<span class="o">)</span>  DELETE FROM <span class="s2">&quot;posts&quot;</span> WHERE <span class="s2">&quot;posts&quot;</span>.<span class="s2">&quot;id&quot;</span> <span class="o">=</span> <span class="nv">$1</span>  <span class="o">[[</span><span class="s2">&quot;id&quot;</span>, 3<span class="o">]]</span>
   <span class="o">(</span>1.7ms<span class="o">)</span>  <span class="nv">COMMIT</span>
-<span class="o">=</span>&gt; <span class="c">#&lt;Post id: 3, title: &quot;Post 101&quot;, body: nil, created_at: &quot;2015-01-31 13:01:43&quot;, updated_at: &quot;2015-01-31 13:01:43&quot;&gt;</span></code></pre></div>
+<span class="o">=</span>&gt; <span class="c">#&lt;Post id: 3, title: &quot;Post 101&quot;, body: nil, created_at: &quot;2015-01-31 13:01:43&quot;, updated_at: &quot;2015-01-31 13:01:43&quot;&gt;</span></code></pre></figure>
 
 <p>This is better than leaving the foreign key set but will still cause an error if you try to access the post.</p>
 
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">2.1.2 :006 &gt; Comment.find<span class="o">(</span>4<span class="o">)</span>.post.title
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">2.1.2 :006 &gt; Comment.find<span class="o">(</span>4<span class="o">)</span>.post.title
   Comment Load <span class="o">(</span>0.5ms<span class="o">)</span>  SELECT  <span class="s2">&quot;comments&quot;</span>.* FROM <span class="s2">&quot;comments&quot;</span>  WHERE <span class="s2">&quot;comments&quot;</span>.<span class="s2">&quot;id&quot;</span> <span class="o">=</span> <span class="nv">$1</span> LIMIT <span class="m">1</span>  <span class="o">[[</span><span class="s2">&quot;id&quot;</span>, 4<span class="o">]]</span>
-NoMethodError: undefined method <span class="sb">`</span>title<span class="err">&#39;</span> <span class="k">for</span> nil:NilClass</code></pre></div>
+NoMethodError: undefined method <span class="sb">`</span>title<span class="err">&#39;</span> <span class="k">for</span> nil:NilClass</code></pre></figure>
 
 <h2>Delete All</h2>
 
 <p>The delete all option is the same as destroy but no callbacks will be executed.</p>
 
-<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">class</span> <span class="nc">Comment</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">class</span> <span class="nc">Comment</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
   <span class="n">belongs_to</span> <span class="ss">:post</span>
   <span class="n">after_destroy</span> <span class="p">{</span> <span class="nb">puts</span> <span class="s2">&quot;Callback Fired&quot;</span> <span class="p">}</span>
-<span class="k">end</span></code></pre></div>
+<span class="k">end</span></code></pre></figure>
 
-<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">class</span> <span class="nc">Post</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">class</span> <span class="nc">Post</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
   <span class="n">has_many</span> <span class="ss">:comments</span><span class="p">,</span> <span class="ss">dependent</span><span class="p">:</span> <span class="ss">:delete_all</span>
-<span class="k">end</span></code></pre></div>
+<span class="k">end</span></code></pre></figure>
 
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">2.1.2 :011 &gt; p.destroy
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">2.1.2 :011 &gt; p.destroy
    <span class="o">(</span>0.2ms<span class="o">)</span>  BEGIN
   SQL <span class="o">(</span>0.3ms<span class="o">)</span>  DELETE FROM <span class="s2">&quot;comments&quot;</span> WHERE <span class="s2">&quot;comments&quot;</span>.<span class="s2">&quot;post_id&quot;</span> <span class="o">=</span> <span class="nv">$1</span>  <span class="o">[[</span><span class="s2">&quot;post_id&quot;</span>, 11<span class="o">]]</span>
   SQL <span class="o">(</span>0.3ms<span class="o">)</span>  DELETE FROM <span class="s2">&quot;posts&quot;</span> WHERE <span class="s2">&quot;posts&quot;</span>.<span class="s2">&quot;id&quot;</span> <span class="o">=</span> <span class="nv">$1</span>  <span class="o">[[</span><span class="s2">&quot;id&quot;</span>, 11<span class="o">]]</span>
    <span class="o">(</span>1.4ms<span class="o">)</span>  <span class="nv">COMMIT</span>
- <span class="o">=</span>&gt; <span class="c">#&lt;Post id: 11, title: &quot;Post 101&quot;, body: nil, created_at: &quot;2015-02-04 08:48:18&quot;, updated_at: &quot;2015-02-04 08:48:18&quot;&gt;</span></code></pre></div>
+ <span class="o">=</span>&gt; <span class="c">#&lt;Post id: 11, title: &quot;Post 101&quot;, body: nil, created_at: &quot;2015-02-04 08:48:18&quot;, updated_at: &quot;2015-02-04 08:48:18&quot;&gt;</span></code></pre></figure>
 
 <h2>Restrict with Exception</h2>
 
@@ -146,14 +146,14 @@ NoMethodError: undefined method <span class="sb">`</span>title<span class="err">
 
 <p>I can imagine it to be useful if you wanted to protect against posts with comments being deleted.</p>
 
-<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">class</span> <span class="nc">Post</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">class</span> <span class="nc">Post</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
   <span class="n">has_many</span> <span class="ss">:comments</span><span class="p">,</span> <span class="ss">dependent</span><span class="p">:</span> <span class="ss">:restrict_with_exception</span>
-<span class="k">end</span></code></pre></div>
+<span class="k">end</span></code></pre></figure>
 
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">2.1.2 :003 &gt; p.destroy
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">2.1.2 :003 &gt; p.destroy
    <span class="o">(</span>0.2ms<span class="o">)</span>  BEGIN
    <span class="o">(</span>2.3ms<span class="o">)</span>  ROLLBACK
-ActiveRecord::DeleteRestrictionError: Cannot delete record because of dependent comments</code></pre></div>
+ActiveRecord::DeleteRestrictionError: Cannot delete record because of dependent comments</code></pre></figure>
 
 <p>As you can see this raises an ActiveRecord::DeleteRestrictionError exception if a comment exists.</p>
 
@@ -161,16 +161,16 @@ ActiveRecord::DeleteRestrictionError: Cannot delete record because of dependent 
 
 <p>The last option is restrict with error which sets an error on the parent record if the parent has child records associated.</p>
 
-<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">class</span> <span class="nc">Post</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">class</span> <span class="nc">Post</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
   <span class="n">has_many</span> <span class="ss">:comments</span><span class="p">,</span> <span class="ss">dependent</span><span class="p">:</span> <span class="ss">:restrict_with_error</span>
-<span class="k">end</span></code></pre></div>
+<span class="k">end</span></code></pre></figure>
 
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">2.1.2 :003 &gt; p.destroy
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">2.1.2 :003 &gt; p.destroy
    <span class="o">(</span>0.2ms<span class="o">)</span>  BEGIN
    <span class="o">(</span>0.2ms<span class="o">)</span>  <span class="nv">ROLLBACK</span>
  <span class="o">=</span>&gt; <span class="nb">false</span>
 2.1.2 :004 &gt; p.errors
- <span class="o">=</span>&gt; <span class="c">#&lt;ActiveModel::Errors:0x000001016a9828 @base=#&lt;Post id: 6, title: &quot;Post 101&quot;, body: nil, created_at: &quot;2015-01-31 13:19:36&quot;, updated_at: &quot;2015-01-31 13:19:36&quot;&gt;, @messages={:base=&gt;[&quot;Cannot delete record because dependent comments exist&quot;]}&gt;</span></code></pre></div>
+ <span class="o">=</span>&gt; <span class="c">#&lt;ActiveModel::Errors:0x000001016a9828 @base=#&lt;Post id: 6, title: &quot;Post 101&quot;, body: nil, created_at: &quot;2015-01-31 13:19:36&quot;, updated_at: &quot;2015-01-31 13:19:36&quot;&gt;, @messages={:base=&gt;[&quot;Cannot delete record because dependent comments exist&quot;]}&gt;</span></code></pre></figure>
 
 <p>Active Record has added an error to the errors attribute in the same way as a validation error would be added.
 I think this would work well with validations as you can  display this error to the admin trying to delete the post.

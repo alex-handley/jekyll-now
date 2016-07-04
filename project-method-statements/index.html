@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
+
+    <title>Project Method Statements – Alex Handley – </title>
+
+    <meta name="author" content="Alex Handley" />
+    <meta name="description" content="">
+
+    <!--[if lt IE 9]>
+      <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <link rel="stylesheet" type="text/css" href="/style.css" />
+    <link rel="alternate" type="application/rss+xml" title="Alex Handley - " href="/feed.xml" />
+
+    <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
+  </head>
+
+  <body>
+    <div class="wrapper-masthead">
+      <div class="container">
+        <header class="masthead clearfix">
+          <a href="/" class="site-avatar"><img src="https://raw.githubusercontent.com/alex-handley/alex-handley.github.io/master/images/alex.png" /></a>
+
+          <div class="site-info">
+            <h1 class="site-name"><a href="/">Alex Handley</a></h1>
+            <p class="site-description"></p>
+          </div>
+
+          <nav>
+            <!-- <a href="/">Blog</a> -->
+            <!-- <a href="/about">About</a> -->
+          </nav>
+        </header>
+
+				<ul class="filter-nav">
+					<li><a href="/" >All</a></li>
+					<li class="spacer">/</li>
+					<li><a href="/tag/Climbing" >Climbing</a></li>
+					<li class="spacer">/</li>
+					<li><a href="/tag/Programming" >Programming</a></li>
+				</ul>
+      </div>
+    </div>
+
+    <div id="main" role="main" class="container">
+      <article class="post">
+  <h1>Project Method Statements</h1>
+
+  <div class="entry">
+    <p>I have been at my current job for just over 6 months and in that time our team has doubled in size, with that comes all of the usual problems that occur when a company started 2 years ago and now has over 100 staff and 20 engineers.
+The growth pain I am going to talk about is how we get code from our computers to the live site, in the past i&#39;ve worked on projects where deploying was as easy as merging the branch and typing <code>git push heroku master</code> or <code>cap deploy</code> if you&#39;re not funded :) and as complex as connecting to a VPN, pushing to a private Git server, emailing DevOps and waiting a few hours/days for your change to be deployed.</p>
+
+<p>Both of these approaches are still vunerable to downtime caused by forgetting to migrate the database, they don&#39;t solve what happens when it fails? how do you rollback?
+While I was thinking about this with our CTO a few weeks back it reminded me of a past project I worked on with an Asbestos removal company, the way they remove this extremely hazzardious material is so tightly regulated that they are required to send a document to UK government health and safety department about how they plan to do it.
+This document is called a method statement, the same idea works for how we deploy our applications, there should be an agreed method for the safest way to deploy the application and how rollback when it goes wrong.</p>
+
+<p>By writing down our method statement and agreeing it with the whole team, it means the whole team is accountable when something goes wrong, this doesnt necessarily mean the person who made the mistake gets sacked, it is more about finding out why? was the person deploying in a rush at 6PM cause a feature was snuck in mid sprint.
+Now the we have a process that the whole team buys into and is accountable for, the next step is making it easy to update and make the process visible to people reviewing the pull request and it just so happens you can now do this with Github with <a href="https://github.com/blog/2111-issue-and-pull-request-templates">Pull Request Templates</a>.
+What has been great so far is because the whole team including people not comfortable with the terminal can amend the process and submit a Pull Request using the GitHub Website.</p>
+
+<p><img src="/images/post_images/pull_request_template.png" alt="example pull request template"></p>
+
+  </div>
+
+  <div class="date">
+    Written on February 22, 2016
+  </div>
+
+  
+</article>
+
+    </div>
+
+    <div class="wrapper-footer">
+      <div class="container">
+        <footer class="footer">
+          
+
+
+
+<a href="http://github.com/alex-handley"><i class="svg-icon github"></i></a>
+
+
+
+
+<a href="http://twitter.com/alex_handley"><i class="svg-icon twitter"></i></a>
+
+
+        </footer>
+      </div>
+    </div>
+
+    
+
+  </body>
+</html>

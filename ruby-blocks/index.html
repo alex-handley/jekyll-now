@@ -59,14 +59,14 @@ While I was moving my files over I found a draft of this blog post.</p>
 <p>I remember blocks being confusing when I first started learning Ruby, they seemed alien when compared to my PHP code.
 After a while I got the hang of them and soon my code was littered with these nuggets:</p>
 
-<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="no">Rack</span><span class="o">::</span><span class="no">Rewrite</span> <span class="k">do</span>
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="no">Rack</span><span class="o">::</span><span class="no">Rewrite</span> <span class="k">do</span>
   <span class="n">r301</span> <span class="s2">&quot;/wiki/alex&quot;</span><span class="p">,</span> <span class="s2">&quot;/alex&quot;</span>
   <span class="n">rewrite</span> <span class="s2">&quot;/docs/go&quot;</span><span class="p">,</span> <span class="s2">&quot;/documentation/go&quot;</span>
-<span class="k">end</span></code></pre></div>
+<span class="k">end</span></code></pre></figure>
 
 <p>After a while they started looking like some of my university coursework, lots of code which was hard to read and make changes too.</p>
 
-<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="no">Rack</span><span class="o">::</span><span class="no">Rewrite</span> <span class="k">do</span>
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="no">Rack</span><span class="o">::</span><span class="no">Rewrite</span> <span class="k">do</span>
   <span class="n">r301</span> <span class="s2">&quot;/wiki/alex&quot;</span><span class="p">,</span> <span class="s2">&quot;/alex&quot;</span>
   <span class="n">r301</span> <span class="s2">&quot;/wiki/steve&quot;</span><span class="p">,</span> <span class="s2">&quot;/steve&quot;</span>
   <span class="n">r301</span> <span class="s2">&quot;/wiki/billy&quot;</span><span class="p">,</span> <span class="s2">&quot;/billy&quot;</span>
@@ -81,12 +81,12 @@ After a while I got the hang of them and soon my code was littered with these nu
   <span class="k">end</span>
 
    <span class="c1"># This would go on and on...</span>
-<span class="k">end</span></code></pre></div>
+<span class="k">end</span></code></pre></figure>
 
 <p>One way to improve this is to pull out the logic into functions which helps to give context to the code.
 i.e what is happening in each part, this is helpful for someone reading the code for the first time.</p>
 
-<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="no">Rack</span><span class="o">::</span><span class="no">Rewrite</span> <span class="k">do</span> <span class="o">|</span><span class="n">t</span><span class="o">|</span>
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="no">Rack</span><span class="o">::</span><span class="no">Rewrite</span> <span class="k">do</span> <span class="o">|</span><span class="n">t</span><span class="o">|</span>
   <span class="c1"># The &quot;*&quot; symbol simply flattens the array into the</span>
   <span class="c1"># separate parameters the method expects.</span>
   <span class="n">wiki_permanant_redirects</span><span class="o">.</span><span class="n">each</span> <span class="p">{</span> <span class="o">|</span><span class="n">args</span><span class="o">|</span> <span class="n">r301</span> <span class="o">*</span><span class="n">args</span> <span class="p">}</span>
@@ -110,14 +110,14 @@ i.e what is happening in each part, this is helpful for someone reading the code
   <span class="n">wiki_users</span><span class="o">.</span><span class="n">collect</span> <span class="k">do</span> <span class="o">|</span><span class="n">user</span><span class="o">|</span>
     <span class="o">[</span><span class="s2">&quot;/wiki/</span><span class="si">#{</span><span class="n">user</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;/</span><span class="si">#{</span><span class="n">user</span><span class="si">}</span><span class="s2">&quot;</span><span class="o">]</span>
   <span class="k">end</span>
-<span class="k">end</span></code></pre></div>
+<span class="k">end</span></code></pre></figure>
 
 <p>The functions could be implemented as classes which will enable you to test in isolation.</p>
 
 <p>Another solution using a loop is to collect the parts of the block as Lambda&#39;s and then pass them to the block.
 This solution works well when there are lots of pieces of logic such as partial Tire queries when using ElasticSearch.</p>
 
-<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">tags</span> <span class="o">=</span> <span class="o">[</span><span class="s2">&quot;ruby&quot;</span><span class="p">,</span> <span class="s2">&quot;java&quot;</span><span class="p">,</span> <span class="s2">&quot;python&quot;</span><span class="o">]</span>
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">tags</span> <span class="o">=</span> <span class="o">[</span><span class="s2">&quot;ruby&quot;</span><span class="p">,</span> <span class="s2">&quot;java&quot;</span><span class="p">,</span> <span class="s2">&quot;python&quot;</span><span class="o">]</span>
 <span class="n">partial_queries</span> <span class="o">=</span> <span class="n">tags</span><span class="o">.</span><span class="n">collect</span> <span class="k">do</span> <span class="o">|</span><span class="n">tag</span><span class="o">|</span>
   <span class="nb">lambda</span> <span class="k">do</span> <span class="o">|</span><span class="n">boolean</span><span class="o">|</span>
     <span class="n">boolean</span> <span class="s2">&quot;tags:</span><span class="si">#{</span><span class="n">tag</span><span class="si">}</span><span class="s2">&quot;</span>
@@ -132,7 +132,7 @@ This solution works well when there are lots of pieces of logic such as partial 
       <span class="k">end</span>
     <span class="k">end</span>
   <span class="k">end</span>
-<span class="k">end</span></code></pre></div>
+<span class="k">end</span></code></pre></figure>
 
 <p>** I am not able to test the above code as the Internet here isn&#39;t good enough to download ElasticSearch.</p>
 

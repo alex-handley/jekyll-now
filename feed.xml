@@ -7,6 +7,53 @@
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml" />
     
       <item>
+        <title>Afternoon hacking with Phoenix</title>
+        <description>&lt;p&gt;Over the past few months my little side projects haven&amp;#39;t made it off the starting blocs. They have all had the same downfall of trying to achieve too much.. make a React app using Phoenix as the backend but spend the whole time getting the build tool setup how you want it.&lt;/p&gt;
+
+&lt;p&gt;So today instead I decided to keep it simple, create an app to track my climbing sessions. Currently I keep all of my notes in a book which is boring as there isn&amp;#39;t much you can do with the data.&lt;/p&gt;
+
+&lt;p&gt;As well as keeping my tech aspirations low I think what also really helped was that I defined my goals at the start:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Quickly record training session.&lt;/li&gt;
+&lt;li&gt;Mobile friendly.&lt;/li&gt;
+&lt;li&gt;Make data available.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Here it is, the sign in button doesn&amp;#39;t toggle and it looks pretty crap but I created something usable in under 4 hours... most of that was rolling my own sign in logic :&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/post_images/training_app.png&quot; alt=&quot;Image of the logs index page&quot;&gt;&lt;/p&gt;
+
+&lt;p&gt;My future goals are once I have recorded a few weeks of data I might compare the number of hours training against conditioning and stretching to see if patterns emerge with tweaks/injuries. I could also map it against personal bests to show the effects training had over time.&lt;/p&gt;
+
+&lt;p&gt;Checkout the code &lt;a href=&quot;https://github.com/alex-handley/climbing_training_app&quot;&gt;here&lt;/a&gt;&lt;/p&gt;
+</description>
+        <pubDate>Mon, 04 Jul 2016 10:38:00 +0100</pubDate>
+        <link>/03-quick-hack-with-phoenix/</link>
+        <guid isPermaLink="true">/03-quick-hack-with-phoenix/</guid>
+      </item>
+    
+      <item>
+        <title>Project Method Statements</title>
+        <description>&lt;p&gt;I have been at my current job for just over 6 months and in that time our team has doubled in size, with that comes all of the usual problems that occur when a company started 2 years ago and now has over 100 staff and 20 engineers.
+The growth pain I am going to talk about is how we get code from our computers to the live site, in the past i&amp;#39;ve worked on projects where deploying was as easy as merging the branch and typing &lt;code&gt;git push heroku master&lt;/code&gt; or &lt;code&gt;cap deploy&lt;/code&gt; if you&amp;#39;re not funded :) and as complex as connecting to a VPN, pushing to a private Git server, emailing DevOps and waiting a few hours/days for your change to be deployed.&lt;/p&gt;
+
+&lt;p&gt;Both of these approaches are still vunerable to downtime caused by forgetting to migrate the database, they don&amp;#39;t solve what happens when it fails? how do you rollback?
+While I was thinking about this with our CTO a few weeks back it reminded me of a past project I worked on with an Asbestos removal company, the way they remove this extremely hazzardious material is so tightly regulated that they are required to send a document to UK government health and safety department about how they plan to do it.
+This document is called a method statement, the same idea works for how we deploy our applications, there should be an agreed method for the safest way to deploy the application and how rollback when it goes wrong.&lt;/p&gt;
+
+&lt;p&gt;By writing down our method statement and agreeing it with the whole team, it means the whole team is accountable when something goes wrong, this doesnt necessarily mean the person who made the mistake gets sacked, it is more about finding out why? was the person deploying in a rush at 6PM cause a feature was snuck in mid sprint.
+Now the we have a process that the whole team buys into and is accountable for, the next step is making it easy to update and make the process visible to people reviewing the pull request and it just so happens you can now do this with Github with &lt;a href=&quot;https://github.com/blog/2111-issue-and-pull-request-templates&quot;&gt;Pull Request Templates&lt;/a&gt;.
+What has been great so far is because the whole team including people not comfortable with the terminal can amend the process and submit a Pull Request using the GitHub Website.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/post_images/pull_request_template.png&quot; alt=&quot;example pull request template&quot;&gt;&lt;/p&gt;
+</description>
+        <pubDate>Mon, 22 Feb 2016 09:38:00 +0000</pubDate>
+        <link>/project-method-statements/</link>
+        <guid isPermaLink="true">/project-method-statements/</guid>
+      </item>
+    
+      <item>
         <title>The story of Mandrillus sphinx who needed glasses</title>
         <description>&lt;p&gt;I recently joined the Happiness squad at LostMyName and after a few days I was alerted by our customer service team that some of our customers were not receiving emails.&lt;/p&gt;
 
@@ -260,14 +307,14 @@ While I was moving my files over I found a draft of this blog post.&lt;/p&gt;
 &lt;p&gt;I remember blocks being confusing when I first started learning Ruby, they seemed alien when compared to my PHP code.
 After a while I got the hang of them and soon my code was littered with these nuggets:&lt;/p&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;no&quot;&gt;Rack&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Rewrite&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;no&quot;&gt;Rack&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Rewrite&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
   &lt;span class=&quot;n&quot;&gt;r301&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;/wiki/alex&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;/alex&amp;quot;&lt;/span&gt;
   &lt;span class=&quot;n&quot;&gt;rewrite&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;/docs/go&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;/documentation/go&amp;quot;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;After a while they started looking like some of my university coursework, lots of code which was hard to read and make changes too.&lt;/p&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;no&quot;&gt;Rack&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Rewrite&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;no&quot;&gt;Rack&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Rewrite&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
   &lt;span class=&quot;n&quot;&gt;r301&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;/wiki/alex&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;/alex&amp;quot;&lt;/span&gt;
   &lt;span class=&quot;n&quot;&gt;r301&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;/wiki/steve&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;/steve&amp;quot;&lt;/span&gt;
   &lt;span class=&quot;n&quot;&gt;r301&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;/wiki/billy&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;/billy&amp;quot;&lt;/span&gt;
@@ -282,12 +329,12 @@ After a while I got the hang of them and soon my code was littered with these nu
   &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
 
    &lt;span class=&quot;c1&quot;&gt;# This would go on and on...&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;One way to improve this is to pull out the logic into functions which helps to give context to the code.
 i.e what is happening in each part, this is helpful for someone reading the code for the first time.&lt;/p&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;no&quot;&gt;Rack&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Rewrite&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;no&quot;&gt;Rack&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Rewrite&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
   &lt;span class=&quot;c1&quot;&gt;# The &amp;quot;*&amp;quot; symbol simply flattens the array into the&lt;/span&gt;
   &lt;span class=&quot;c1&quot;&gt;# separate parameters the method expects.&lt;/span&gt;
   &lt;span class=&quot;n&quot;&gt;wiki_permanant_redirects&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;each&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;r301&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;args&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
@@ -311,14 +358,14 @@ i.e what is happening in each part, this is helpful for someone reading the code
   &lt;span class=&quot;n&quot;&gt;wiki_users&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;collect&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
     &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;/wiki/&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;/&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
   &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;The functions could be implemented as classes which will enable you to test in isolation.&lt;/p&gt;
 
 &lt;p&gt;Another solution using a loop is to collect the parts of the block as Lambda&amp;#39;s and then pass them to the block.
 This solution works well when there are lots of pieces of logic such as partial Tire queries when using ElasticSearch.&lt;/p&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;tags&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;ruby&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;java&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;python&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;tags&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;ruby&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;java&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;python&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
 &lt;span class=&quot;n&quot;&gt;partial_queries&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tags&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;collect&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tag&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
   &lt;span class=&quot;nb&quot;&gt;lambda&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;boolean&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
     &lt;span class=&quot;n&quot;&gt;boolean&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;tags:&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tag&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;&lt;/span&gt;
@@ -333,7 +380,7 @@ This solution works well when there are lots of pieces of logic such as partial 
       &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
     &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
   &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;** I am not able to test the above code as the Internet here isn&amp;#39;t good enough to download ElasticSearch.&lt;/p&gt;
 
@@ -359,10 +406,10 @@ As with the first example, classes can be used to group similar logic such as ta
         <title>Rails Dependent Associations</title>
         <description>&lt;p&gt;I often find that the dependent parameter gets forgotten on projects. This is easy to do if you&amp;#39;re new to Rails. When dependent is not set, nothing terrible happens at first… but once you get further into a project you will start seeing this:&lt;/p&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;2.1.2 :013 &amp;gt; Comment.first.post.title
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;2.1.2 :013 &amp;gt; Comment.first.post.title
   Comment Load &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;0.6ms&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;  SELECT  &lt;span class=&quot;s2&quot;&gt;&amp;quot;comments&amp;quot;&lt;/span&gt;.* FROM &lt;span class=&quot;s2&quot;&gt;&amp;quot;comments&amp;quot;&lt;/span&gt;   ORDER BY &lt;span class=&quot;s2&quot;&gt;&amp;quot;comments&amp;quot;&lt;/span&gt;.&lt;span class=&quot;s2&quot;&gt;&amp;quot;id&amp;quot;&lt;/span&gt; ASC LIMIT 1
   Post Load &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;0.3ms&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;  SELECT  &lt;span class=&quot;s2&quot;&gt;&amp;quot;posts&amp;quot;&lt;/span&gt;.* FROM &lt;span class=&quot;s2&quot;&gt;&amp;quot;posts&amp;quot;&lt;/span&gt;  WHERE &lt;span class=&quot;s2&quot;&gt;&amp;quot;posts&amp;quot;&lt;/span&gt;.&lt;span class=&quot;s2&quot;&gt;&amp;quot;id&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$1&lt;/span&gt; LIMIT &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;[[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;id&amp;quot;&lt;/span&gt;, 1&lt;span class=&quot;o&quot;&gt;]]&lt;/span&gt;
-  NoMethodError: undefined method &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;title&lt;span class=&quot;err&quot;&gt;&amp;#39;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; nil:NilClass&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+  NoMethodError: undefined method &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;title&lt;span class=&quot;err&quot;&gt;&amp;#39;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; nil:NilClass&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;The cause of the error is that the parent record no longer exists, but the foreign key still references the parent object.
 To stop this from happening you can use the dependent option with &lt;code&gt;has_many&lt;/code&gt; and &lt;code&gt;has_one&lt;/code&gt;.&lt;/p&gt;
@@ -375,18 +422,18 @@ To stop this from happening you can use the dependent option with &lt;code&gt;ha
 
 &lt;p&gt;The destroy option is the most common in a Rails app, as it is the most likely scenario. For example, when you delete a post, you probably want to remove the comments as well.&lt;/p&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Post&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;ActiveRecord&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Base&lt;/span&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Post&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;ActiveRecord&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Base&lt;/span&gt;
   &lt;span class=&quot;n&quot;&gt;has_many&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:comments&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;dependent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:destroy&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Comment&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;ActiveRecord&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Base&lt;/span&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Comment&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;ActiveRecord&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Base&lt;/span&gt;
   &lt;span class=&quot;n&quot;&gt;belongs_to&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:post&lt;/span&gt;
   &lt;span class=&quot;n&quot;&gt;after_destroy&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Callback Fired&amp;quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;Now when you delete the post the comments are also deleted. Any callback&amp;#39;s that are defined will also be fired.&lt;/p&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;2.1.2 :004 &amp;gt; p.destroy
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;2.1.2 :004 &amp;gt; p.destroy
    &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;0.1ms&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;  BEGIN
   Comment Load &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;0.3ms&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;  SELECT &lt;span class=&quot;s2&quot;&gt;&amp;quot;comments&amp;quot;&lt;/span&gt;.* FROM &lt;span class=&quot;s2&quot;&gt;&amp;quot;comments&amp;quot;&lt;/span&gt;  WHERE &lt;span class=&quot;s2&quot;&gt;&amp;quot;comments&amp;quot;&lt;/span&gt;.&lt;span class=&quot;s2&quot;&gt;&amp;quot;post_id&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$1&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;[[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;post_id&amp;quot;&lt;/span&gt;, 18&lt;span class=&quot;o&quot;&gt;]]&lt;/span&gt;
   SQL &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;0.2ms&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;  DELETE FROM &lt;span class=&quot;s2&quot;&gt;&amp;quot;comments&amp;quot;&lt;/span&gt; WHERE &lt;span class=&quot;s2&quot;&gt;&amp;quot;comments&amp;quot;&lt;/span&gt;.&lt;span class=&quot;s2&quot;&gt;&amp;quot;id&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$1&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;[[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;id&amp;quot;&lt;/span&gt;, 26&lt;span class=&quot;o&quot;&gt;]]&lt;/span&gt;
@@ -395,7 +442,7 @@ Callback Fired
 Callback Fired
   SQL &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;0.2ms&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;  DELETE FROM &lt;span class=&quot;s2&quot;&gt;&amp;quot;posts&amp;quot;&lt;/span&gt; WHERE &lt;span class=&quot;s2&quot;&gt;&amp;quot;posts&amp;quot;&lt;/span&gt;.&lt;span class=&quot;s2&quot;&gt;&amp;quot;id&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$1&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;[[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;id&amp;quot;&lt;/span&gt;, 18&lt;span class=&quot;o&quot;&gt;]]&lt;/span&gt;
    &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;1.6ms&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;  &lt;span class=&quot;nv&quot;&gt;COMMIT&lt;/span&gt;
- &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&amp;gt; &lt;span class=&quot;c&quot;&gt;#&amp;lt;Post id: 18, title: &amp;quot;Post 101&amp;quot;, body: nil, created_at: &amp;quot;2015-02-07 16:42:13&amp;quot;, updated_at: &amp;quot;2015-02-07 16:42:13&amp;quot;&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+ &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&amp;gt; &lt;span class=&quot;c&quot;&gt;#&amp;lt;Post id: 18, title: &amp;quot;Post 101&amp;quot;, body: nil, created_at: &amp;quot;2015-02-07 16:42:13&amp;quot;, updated_at: &amp;quot;2015-02-07 16:42:13&amp;quot;&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;The destroy option should be a default in Rails because of the ethos of convention over configuration. Currently what happens is the child record doesn&amp;#39;t have its foreign key nullified, which is the next option we will look at.&lt;/p&gt;
 
@@ -405,45 +452,45 @@ Callback Fired
 
 &lt;p&gt;Nullify is the opposite to destroy, it means the child record is not destroyed after Active Record removes the parent. Curiously, not that many developers seem to know that this option exist.&lt;/p&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Post&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;ActiveRecord&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Base&lt;/span&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Post&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;ActiveRecord&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Base&lt;/span&gt;
   &lt;span class=&quot;n&quot;&gt;has_many&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:comments&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;dependent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:nullify&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;Now when you delete the post the comment is not deleted. Instead the foreign key is set to Null.&lt;/p&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;.1.2 :003 &amp;gt; p.destroy
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;.1.2 :003 &amp;gt; p.destroy
   &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;0.2ms&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;  BEGIN
  Comment Load &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;0.5ms&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;  SELECT &lt;span class=&quot;s2&quot;&gt;&amp;quot;comments&amp;quot;&lt;/span&gt;.* FROM &lt;span class=&quot;s2&quot;&gt;&amp;quot;comments&amp;quot;&lt;/span&gt;  WHERE &lt;span class=&quot;s2&quot;&gt;&amp;quot;comments&amp;quot;&lt;/span&gt;.&lt;span class=&quot;s2&quot;&gt;&amp;quot;post_id&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$1&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;[[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;post_id&amp;quot;&lt;/span&gt;, 3&lt;span class=&quot;o&quot;&gt;]]&lt;/span&gt;
  SQL &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;0.3ms&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;  DELETE FROM &lt;span class=&quot;s2&quot;&gt;&amp;quot;comments&amp;quot;&lt;/span&gt; WHERE &lt;span class=&quot;s2&quot;&gt;&amp;quot;comments&amp;quot;&lt;/span&gt;.&lt;span class=&quot;s2&quot;&gt;&amp;quot;id&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$1&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;[[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;id&amp;quot;&lt;/span&gt;, 3&lt;span class=&quot;o&quot;&gt;]]&lt;/span&gt;
  SQL &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;0.2ms&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;  DELETE FROM &lt;span class=&quot;s2&quot;&gt;&amp;quot;posts&amp;quot;&lt;/span&gt; WHERE &lt;span class=&quot;s2&quot;&gt;&amp;quot;posts&amp;quot;&lt;/span&gt;.&lt;span class=&quot;s2&quot;&gt;&amp;quot;id&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$1&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;[[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;id&amp;quot;&lt;/span&gt;, 3&lt;span class=&quot;o&quot;&gt;]]&lt;/span&gt;
   &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;1.7ms&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;  &lt;span class=&quot;nv&quot;&gt;COMMIT&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&amp;gt; &lt;span class=&quot;c&quot;&gt;#&amp;lt;Post id: 3, title: &amp;quot;Post 101&amp;quot;, body: nil, created_at: &amp;quot;2015-01-31 13:01:43&amp;quot;, updated_at: &amp;quot;2015-01-31 13:01:43&amp;quot;&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&amp;gt; &lt;span class=&quot;c&quot;&gt;#&amp;lt;Post id: 3, title: &amp;quot;Post 101&amp;quot;, body: nil, created_at: &amp;quot;2015-01-31 13:01:43&amp;quot;, updated_at: &amp;quot;2015-01-31 13:01:43&amp;quot;&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;This is better than leaving the foreign key set but will still cause an error if you try to access the post.&lt;/p&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;2.1.2 :006 &amp;gt; Comment.find&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;4&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;.post.title
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;2.1.2 :006 &amp;gt; Comment.find&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;4&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;.post.title
   Comment Load &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;0.5ms&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;  SELECT  &lt;span class=&quot;s2&quot;&gt;&amp;quot;comments&amp;quot;&lt;/span&gt;.* FROM &lt;span class=&quot;s2&quot;&gt;&amp;quot;comments&amp;quot;&lt;/span&gt;  WHERE &lt;span class=&quot;s2&quot;&gt;&amp;quot;comments&amp;quot;&lt;/span&gt;.&lt;span class=&quot;s2&quot;&gt;&amp;quot;id&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$1&lt;/span&gt; LIMIT &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;[[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;id&amp;quot;&lt;/span&gt;, 4&lt;span class=&quot;o&quot;&gt;]]&lt;/span&gt;
-NoMethodError: undefined method &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;title&lt;span class=&quot;err&quot;&gt;&amp;#39;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; nil:NilClass&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+NoMethodError: undefined method &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;title&lt;span class=&quot;err&quot;&gt;&amp;#39;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; nil:NilClass&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;h2&gt;Delete All&lt;/h2&gt;
 
 &lt;p&gt;The delete all option is the same as destroy but no callbacks will be executed.&lt;/p&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Comment&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;ActiveRecord&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Base&lt;/span&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Comment&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;ActiveRecord&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Base&lt;/span&gt;
   &lt;span class=&quot;n&quot;&gt;belongs_to&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:post&lt;/span&gt;
   &lt;span class=&quot;n&quot;&gt;after_destroy&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Callback Fired&amp;quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Post&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;ActiveRecord&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Base&lt;/span&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Post&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;ActiveRecord&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Base&lt;/span&gt;
   &lt;span class=&quot;n&quot;&gt;has_many&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:comments&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;dependent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:delete_all&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;2.1.2 :011 &amp;gt; p.destroy
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;2.1.2 :011 &amp;gt; p.destroy
    &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;0.2ms&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;  BEGIN
   SQL &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;0.3ms&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;  DELETE FROM &lt;span class=&quot;s2&quot;&gt;&amp;quot;comments&amp;quot;&lt;/span&gt; WHERE &lt;span class=&quot;s2&quot;&gt;&amp;quot;comments&amp;quot;&lt;/span&gt;.&lt;span class=&quot;s2&quot;&gt;&amp;quot;post_id&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$1&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;[[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;post_id&amp;quot;&lt;/span&gt;, 11&lt;span class=&quot;o&quot;&gt;]]&lt;/span&gt;
   SQL &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;0.3ms&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;  DELETE FROM &lt;span class=&quot;s2&quot;&gt;&amp;quot;posts&amp;quot;&lt;/span&gt; WHERE &lt;span class=&quot;s2&quot;&gt;&amp;quot;posts&amp;quot;&lt;/span&gt;.&lt;span class=&quot;s2&quot;&gt;&amp;quot;id&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$1&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;[[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;id&amp;quot;&lt;/span&gt;, 11&lt;span class=&quot;o&quot;&gt;]]&lt;/span&gt;
    &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;1.4ms&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;  &lt;span class=&quot;nv&quot;&gt;COMMIT&lt;/span&gt;
- &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&amp;gt; &lt;span class=&quot;c&quot;&gt;#&amp;lt;Post id: 11, title: &amp;quot;Post 101&amp;quot;, body: nil, created_at: &amp;quot;2015-02-04 08:48:18&amp;quot;, updated_at: &amp;quot;2015-02-04 08:48:18&amp;quot;&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+ &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&amp;gt; &lt;span class=&quot;c&quot;&gt;#&amp;lt;Post id: 11, title: &amp;quot;Post 101&amp;quot;, body: nil, created_at: &amp;quot;2015-02-04 08:48:18&amp;quot;, updated_at: &amp;quot;2015-02-04 08:48:18&amp;quot;&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;h2&gt;Restrict with Exception&lt;/h2&gt;
 
@@ -451,14 +498,14 @@ NoMethodError: undefined method &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;t
 
 &lt;p&gt;I can imagine it to be useful if you wanted to protect against posts with comments being deleted.&lt;/p&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Post&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;ActiveRecord&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Base&lt;/span&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Post&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;ActiveRecord&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Base&lt;/span&gt;
   &lt;span class=&quot;n&quot;&gt;has_many&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:comments&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;dependent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:restrict_with_exception&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;2.1.2 :003 &amp;gt; p.destroy
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;2.1.2 :003 &amp;gt; p.destroy
    &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;0.2ms&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;  BEGIN
    &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;2.3ms&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;  ROLLBACK
-ActiveRecord::DeleteRestrictionError: Cannot delete record because of dependent comments&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+ActiveRecord::DeleteRestrictionError: Cannot delete record because of dependent comments&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;As you can see this raises an ActiveRecord::DeleteRestrictionError exception if a comment exists.&lt;/p&gt;
 
@@ -466,16 +513,16 @@ ActiveRecord::DeleteRestrictionError: Cannot delete record because of dependent 
 
 &lt;p&gt;The last option is restrict with error which sets an error on the parent record if the parent has child records associated.&lt;/p&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Post&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;ActiveRecord&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Base&lt;/span&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Post&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;ActiveRecord&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Base&lt;/span&gt;
   &lt;span class=&quot;n&quot;&gt;has_many&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:comments&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;dependent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:restrict_with_error&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;2.1.2 :003 &amp;gt; p.destroy
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;2.1.2 :003 &amp;gt; p.destroy
    &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;0.2ms&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;  BEGIN
    &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;0.2ms&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;  &lt;span class=&quot;nv&quot;&gt;ROLLBACK&lt;/span&gt;
  &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&amp;gt; &lt;span class=&quot;nb&quot;&gt;false&lt;/span&gt;
 2.1.2 :004 &amp;gt; p.errors
- &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&amp;gt; &lt;span class=&quot;c&quot;&gt;#&amp;lt;ActiveModel::Errors:0x000001016a9828 @base=#&amp;lt;Post id: 6, title: &amp;quot;Post 101&amp;quot;, body: nil, created_at: &amp;quot;2015-01-31 13:19:36&amp;quot;, updated_at: &amp;quot;2015-01-31 13:19:36&amp;quot;&amp;gt;, @messages={:base=&amp;gt;[&amp;quot;Cannot delete record because dependent comments exist&amp;quot;]}&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+ &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&amp;gt; &lt;span class=&quot;c&quot;&gt;#&amp;lt;ActiveModel::Errors:0x000001016a9828 @base=#&amp;lt;Post id: 6, title: &amp;quot;Post 101&amp;quot;, body: nil, created_at: &amp;quot;2015-01-31 13:19:36&amp;quot;, updated_at: &amp;quot;2015-01-31 13:19:36&amp;quot;&amp;gt;, @messages={:base=&amp;gt;[&amp;quot;Cannot delete record because dependent comments exist&amp;quot;]}&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;Active Record has added an error to the errors attribute in the same way as a validation error would be added.
 I think this would work well with validations as you can  display this error to the admin trying to delete the post.
@@ -505,71 +552,17 @@ Restrict with error could be a replacement to doing a custom validation rule in 
         <title>Protip: Pasting code in Vim (Updated)</title>
         <description>&lt;p&gt;On &lt;a href=&quot;http://rubyrogues.com/129-rr-sharpening-tools-with-ben-orenstein/&quot; target=&quot;_blank&quot;&gt;Ruby Rogues&lt;/a&gt; a few weeks back, Ben Orenstein mentioned he tries to spend 15 minutes a day improving his workflow and tools. I decided to take this onboard and this week I looked into how to paste code in Vim without loosing its indentation.&lt;/p&gt;
 &lt;p&gt;1. Turn off autoindent.&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-vim&quot; data-lang=&quot;vim&quot;&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;set&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;paste&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-vim&quot; data-lang=&quot;vim&quot;&gt;  :&lt;span class=&quot;k&quot;&gt;set&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;paste&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 &lt;p&gt;2. Enter insert mode.&lt;/p&gt;
 &lt;p&gt;3. Paste code&lt;/p&gt;
 &lt;p&gt;4. Turn autoindent back on.&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-vim&quot; data-lang=&quot;vim&quot;&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;set&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;nopaste&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-vim&quot; data-lang=&quot;vim&quot;&gt;  :&lt;span class=&quot;k&quot;&gt;set&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;nopaste&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 &lt;p&gt;I found the solution &lt;a href=&quot;http://stackoverflow.com/questions/2514445/turning-off-auto-indent-when-pasting-text-into-vim/2514520#2514520&quot; target=&quot;_blank&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Enjoy&lt;br/&gt;Alex&lt;/p&gt;
 </description>
         <pubDate>Sun, 09 Feb 2014 16:22:00 +0000</pubDate>
         <link>/protip-pasting-code-in-vim/</link>
         <guid isPermaLink="true">/protip-pasting-code-in-vim/</guid>
-      </item>
-    
-      <item>
-        <title>Rails Performance: The Database</title>
-        <description>&lt;p&gt;&lt;span&gt;My primary toolkit is the Ruby on Rails framework, and I mainly work with applications that have been in production for a while, which usually means they&amp;#8217;re in&lt;/span&gt; need of a little pick-me-up. I thought it would be good to write a mini series about the things I typically look for when developing and maintaining Rails apps.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Picking up a Database&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span&gt;When I start working on an app with history the first thing I do after bundling and running the test suite is create a diagram of the database. This used to take up lots of time because I was doing it by hand, &lt;/span&gt;but recently I have been using &lt;a href=&quot;https://github.com/voormedia/rails-erd&quot; target=&quot;_blank&quot;&gt;rails-erd&lt;/a&gt; to automate the process.&lt;/p&gt;
-&lt;p&gt;Running &amp;#8220;rake erd&amp;#8221; creates a pdf based off the applications models.&lt;/p&gt;
-&lt;p&gt;&lt;img alt=&quot;image&quot; src=&quot;https://31.media.tumblr.com/ef7632013898555a789cbb855304290b/tumblr_inline_mxx4wbeSOL1qbbu12.png&quot;/&gt;&lt;/p&gt;
-&lt;p&gt;This is a massive timesaver but it does take away the process of building the ERD diagram - which is invaluable for pointing out red flags such as associations that are not needed and fields that are no longer used.&lt;/p&gt;
-&lt;p&gt;At secondary school I was lucky enough to take a Oracle certification in database design, and one of the core things we learned was Database Normalisation, which came with a set of guidelines for creating good databases. &lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;The guidelines are broken into stages:&lt;/strong&gt;&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;First Normal Form (1NF)&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;Related data should be grouped into separate tables, there should not be duplicated fields in the same table and each row should have a unique key (Primary Key).&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Second Normal Form (2NF)&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;Separate fields into a new table that apply to multiple rows.&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;For example: if you have a projects table, the client should be in their own table so that when you update their address you only have to do it in one place, not in 10.&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;Tables should be related to each other using primary and foreign keys to join the related tables.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Third Normal Form (3NF)&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;Ensure the columns in the table are dependent on the primary key.&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;For example, if you have a teacher who is part of a department, they should be in separate tables because department is it own entity that can exist even if it hasn&amp;#8217;t got any teachers.&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Fourth and Fifth Normal Form (4NF)&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;Both fourth and fifth normal form discuss multivalue dependencies, which in Rails-land are Has and belong to many and has many through.&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;For example: a skill should not be stored in the same table as a user.&lt;/em&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;The Rails framework is pretty good at ensuring that these guidelines are followed, the generators automatically create a primary key, if you use the &lt;a href=&quot;http://api.rubyonrails.org/classes/ActiveRecord/ConnectionAdapters/TableDefinition.html#method-i-references&quot; target=&quot;_blank&quot;&gt;references migration type&lt;/a&gt; it will automagically set up the foreign key relation.&lt;/p&gt;
-&lt;p&gt;These rules are definitely more of a suggestion and in some cases can be ignored if there are good reasons to do so: one example is optimisation. By storing all of a users skills as a serialised array in one field you could speed up a request by removing the need for doing a SQL join.&lt;/p&gt;
-&lt;p&gt;I glossed over some of the finer details, so if you are interested in finding out more on the subject, a great technical paper to read is &lt;a href=&quot;http://www.bkent.net/Doc/simple5.htm&quot; target=&quot;_blank&quot;&gt;A Simple Guide to Five Normal Forms in Relational Database Theory&lt;/a&gt;. If you prefer lighter reading the &lt;a href=&quot;http://databases.about.com/od/specificproducts/a/normalization.htm&quot; target=&quot;_blank&quot;&gt;about&lt;/a&gt; series is pretty good.&lt;/p&gt;
-&lt;p&gt;Alex&lt;/p&gt;
-</description>
-        <pubDate>Mon, 03 Feb 2014 13:15:18 +0000</pubDate>
-        <link>/rails-performance-the-database/</link>
-        <guid isPermaLink="true">/rails-performance-the-database/</guid>
-      </item>
-    
-      <item>
-        <title>Rails ProTip: Stop generating empty files you&#39;re not gonna use!</title>
-        <description>&lt;p&gt;I regularly work on projects where there are default pending specs and helpers/assets that are empty. This is bad for two reasons: firstly RSpec and the Asset pipeline still check/load these files which slows things down, and secondly they make the project harder to navigate.&lt;/p&gt;
-
-&lt;p&gt;I recommend adding this too your application.rb today!&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;generators&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;g&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;g&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;test_framework&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:rspec&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;views&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;routes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;false&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;g&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;helper_specs&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;false&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;g&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;stylesheets&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;false&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;g&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;javascripts&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;false&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;g&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;helper&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;false&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-</description>
-        <pubDate>Mon, 20 Jan 2014 09:38:00 +0000</pubDate>
-        <link>/rails-protip-stop-generating-empty-files-you-are/</link>
-        <guid isPermaLink="true">/rails-protip-stop-generating-empty-files-you-are/</guid>
       </item>
     
   </channel>

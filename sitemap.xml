@@ -1,113 +1,121 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>/story-of-mandrillus-sphinx-who-needed-glasses/</loc>
-    <lastmod>2015-09-17T10:38:00+01:00</lastmod>
-  </url>
-  <url>
-    <loc>/first-3-hours-on-project/</loc>
-    <lastmod>2015-09-05T10:38:00+01:00</lastmod>
-  </url>
-  <url>
-    <loc>/one-year-as-a-sport-climber_part1/</loc>
-    <lastmod>2015-07-31T10:38:00+01:00</lastmod>
-  </url>
-  <url>
-    <loc>/one-year-as-a-sport-climber/</loc>
-    <lastmod>2015-06-08T10:38:00+01:00</lastmod>
-  </url>
-  <url>
-    <loc>/ruby-blocks/</loc>
-    <lastmod>2015-04-01T10:38:00+01:00</lastmod>
-  </url>
-  <url>
-    <loc>/rails-dependent-associations/</loc>
-    <lastmod>2015-01-31T09:38:00+00:00</lastmod>
-  </url>
-  <url>
-    <loc>/dumbfounded/</loc>
-    <lastmod>2014-05-26T10:38:00+01:00</lastmod>
-  </url>
-  <url>
-    <loc>/protip-pasting-code-in-vim/</loc>
-    <lastmod>2014-02-09T16:22:00+00:00</lastmod>
-  </url>
-  <url>
-    <loc>/rails-performance-the-database/</loc>
-    <lastmod>2014-02-03T13:15:18+00:00</lastmod>
-  </url>
-  <url>
-    <loc>/rails-protip-stop-generating-empty-files-you-are/</loc>
-    <lastmod>2014-01-20T09:38:00+00:00</lastmod>
-  </url>
-  <url>
-    <loc>/setting-up-logwatch-to-email-logs-using-gmail/</loc>
-    <lastmod>2013-12-03T08:49:00+00:00</lastmod>
-  </url>
-  <url>
-    <loc>/protip-reactivating-iectrl-vms/</loc>
-    <lastmod>2013-11-29T12:23:00+00:00</lastmod>
-  </url>
-  <url>
-    <loc>/a-better-way-to-handle-ssh-keys/</loc>
-    <lastmod>2013-11-12T14:42:00+00:00</lastmod>
-  </url>
-  <url>
-    <loc>/rails-tip-titleize-acronyms/</loc>
-    <lastmod>2013-10-09T09:59:00+01:00</lastmod>
-  </url>
-  <url>
-    <loc>/404.html</loc>
-  </url>
-  <url>
-    <loc>/about/</loc>
-  </url>
-  <url>
-    <loc>/</loc>
-  </url>
-  <url>
-    <loc>/tag/ruby%20on%20rails/</loc>
-  </url>
-  <url>
-    <loc>/tag/Programming/</loc>
-  </url>
-  <url>
-    <loc>/tag/security/</loc>
-  </url>
-  <url>
-    <loc>/tag/ssh/</loc>
-  </url>
-  <url>
-    <loc>/tag/sysadmin/</loc>
-  </url>
-  <url>
-    <loc>/tag/logwatch/</loc>
-  </url>
-  <url>
-    <loc>/tag/Rails/</loc>
-  </url>
-  <url>
-    <loc>/tag/Ruby/</loc>
-  </url>
-  <url>
-    <loc>/tag/protip/</loc>
-  </url>
-  <url>
-    <loc>/tag/ruby-on-rails/</loc>
-  </url>
-  <url>
-    <loc>/tag/database-design/</loc>
-  </url>
-  <url>
-    <loc>/tag/vim%20sharpening-up/</loc>
-  </url>
-  <url>
-    <loc>/tag/Climbing/</loc>
-  </url>
-  <url>
-    <loc>/tag/Models/</loc>
-  </url>
-  <url>
-    <loc>/tag/draft/</loc>
-  </url>
+<url>
+<loc>/03-quick-hack-with-phoenix/</loc>
+<lastmod>2016-07-04T10:38:00+01:00</lastmod>
+</url>
+<url>
+<loc>/project-method-statements/</loc>
+<lastmod>2016-02-22T09:38:00+00:00</lastmod>
+</url>
+<url>
+<loc>/story-of-mandrillus-sphinx-who-needed-glasses/</loc>
+<lastmod>2015-09-17T10:38:00+01:00</lastmod>
+</url>
+<url>
+<loc>/first-3-hours-on-project/</loc>
+<lastmod>2015-09-05T10:38:00+01:00</lastmod>
+</url>
+<url>
+<loc>/one-year-as-a-sport-climber_part1/</loc>
+<lastmod>2015-07-31T10:38:00+01:00</lastmod>
+</url>
+<url>
+<loc>/one-year-as-a-sport-climber/</loc>
+<lastmod>2015-06-08T10:38:00+01:00</lastmod>
+</url>
+<url>
+<loc>/ruby-blocks/</loc>
+<lastmod>2015-04-01T10:38:00+01:00</lastmod>
+</url>
+<url>
+<loc>/rails-dependent-associations/</loc>
+<lastmod>2015-01-31T09:38:00+00:00</lastmod>
+</url>
+<url>
+<loc>/dumbfounded/</loc>
+<lastmod>2014-05-26T10:38:00+01:00</lastmod>
+</url>
+<url>
+<loc>/protip-pasting-code-in-vim/</loc>
+<lastmod>2014-02-09T16:22:00+00:00</lastmod>
+</url>
+<url>
+<loc>/rails-performance-the-database/</loc>
+<lastmod>2014-02-03T13:15:18+00:00</lastmod>
+</url>
+<url>
+<loc>/rails-protip-stop-generating-empty-files-you-are/</loc>
+<lastmod>2014-01-20T09:38:00+00:00</lastmod>
+</url>
+<url>
+<loc>/setting-up-logwatch-to-email-logs-using-gmail/</loc>
+<lastmod>2013-12-03T08:49:00+00:00</lastmod>
+</url>
+<url>
+<loc>/protip-reactivating-iectrl-vms/</loc>
+<lastmod>2013-11-29T12:23:00+00:00</lastmod>
+</url>
+<url>
+<loc>/a-better-way-to-handle-ssh-keys/</loc>
+<lastmod>2013-11-12T14:42:00+00:00</lastmod>
+</url>
+<url>
+<loc>/rails-tip-titleize-acronyms/</loc>
+<lastmod>2013-10-09T09:59:00+01:00</lastmod>
+</url>
+<url>
+<loc>/404/</loc>
+</url>
+<url>
+<loc>/about/</loc>
+</url>
+<url>
+<loc>/</loc>
+</url>
+<url>
+<loc>/tag/ruby%2520on%2520rails/</loc>
+</url>
+<url>
+<loc>/tag/Programming/</loc>
+</url>
+<url>
+<loc>/tag/security/</loc>
+</url>
+<url>
+<loc>/tag/ssh/</loc>
+</url>
+<url>
+<loc>/tag/sysadmin/</loc>
+</url>
+<url>
+<loc>/tag/logwatch/</loc>
+</url>
+<url>
+<loc>/tag/Rails/</loc>
+</url>
+<url>
+<loc>/tag/Ruby/</loc>
+</url>
+<url>
+<loc>/tag/protip/</loc>
+</url>
+<url>
+<loc>/tag/ruby-on-rails/</loc>
+</url>
+<url>
+<loc>/tag/database-design/</loc>
+</url>
+<url>
+<loc>/tag/vim%2520sharpening-up/</loc>
+</url>
+<url>
+<loc>/tag/Climbing/</loc>
+</url>
+<url>
+<loc>/tag/Models/</loc>
+</url>
+<url>
+<loc>/tag/draft/</loc>
+</url>
 </urlset>

@@ -53,16 +53,16 @@
 
   <div class="entry">
     <p>I ran into a problem whilst trying to titleize a string containing an acronym. For example:</p>
-<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="s2">&quot;building an API&quot;</span><span class="o">.</span><span class="n">titleize</span></code></pre></div>
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby">  <span class="s2">&quot;building an API&quot;</span><span class="o">.</span><span class="n">titleize</span></code></pre></figure>
 <p>Will output</p>
-<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="no">Building</span> <span class="no">An</span> <span class="no">Api</span></code></pre></div>
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby">  <span class="no">Building</span> <span class="no">An</span> <span class="no">Api</span></code></pre></figure>
 <p>Not exactly what I was after but with a small change to the Inflector class you can define your own acronyms.</p>
 <p>config/initializers/inflections.rb</p>
-<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="no">ActiveSupport</span><span class="o">::</span><span class="no">Inflector</span><span class="o">.</span><span class="n">inflections</span> <span class="k">do</span> <span class="o">|</span><span class="n">inflect</span><span class="o">|</span>
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="no">ActiveSupport</span><span class="o">::</span><span class="no">Inflector</span><span class="o">.</span><span class="n">inflections</span> <span class="k">do</span> <span class="o">|</span><span class="n">inflect</span><span class="o">|</span>
   <span class="n">inflect</span><span class="o">.</span><span class="n">acronym</span> <span class="s2">&quot;API&quot;</span>
-<span class="k">end</span></code></pre></div>
+<span class="k">end</span></code></pre></figure>
 <p>Now:</p>
-<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="s2">&quot;Building An API&quot;</span><span class="o">.</span><span class="n">titleize</span></code></pre></div>
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby">  <span class="s2">&quot;Building An API&quot;</span><span class="o">.</span><span class="n">titleize</span></code></pre></figure>
 
 
   </div>

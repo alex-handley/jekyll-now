@@ -59,11 +59,11 @@
 </code></pre></div>
 <p>Step 2. Configure our client to talk to Gmail.</p>
 
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">sudo vim /etc/ssmtp/ssmtp.conf</code></pre></div>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">  sudo vim /etc/ssmtp/ssmtp.conf</code></pre></figure>
 
 <p>The config for Gmail should look like this:</p>
 
-<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">root</span><span class="o">=</span>YOUR_EMAIL_ADDRESS
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">root</span><span class="o">=</span>YOUR_EMAIL_ADDRESS
 <span class="nv">mailhub</span><span class="o">=</span>smtp.gmail.com:587
 <span class="nv">rewriteDomain</span><span class="o">=</span>YOUR_EMAIL_DOMAIN
 <span class="nv">AuthUser</span><span class="o">=</span>YOUR_USERNAME
@@ -71,38 +71,38 @@
 <span class="nv">FromLineOverride</span><span class="o">=</span>YES
 <span class="nv">UseTLS</span><span class="o">=</span>YES
 <span class="nv">UseSTARTTLS</span><span class="o">=</span>YES
-<span class="nv">hostname</span><span class="o">=</span>smtp.gmail.com:587</code></pre></div>
+<span class="nv">hostname</span><span class="o">=</span>smtp.gmail.com:587</code></pre></figure>
 
 <p>Step 3. Check your configuration works</p>
 
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">cat - <span class="p">|</span> /usr/sbin/ssmtp -v</code></pre></div>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">  cat - <span class="p">|</span> /usr/sbin/ssmtp -v</code></pre></figure>
 
 <p>Now press ctrl-d and you should see something like this:</p>
 
-<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="m">354</span> Go ahead l4sm46964373een.13 - gsmtp
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="m">354</span> Go ahead l4sm46964373een.13 - gsmtp
 Received: by smtp.gmail.com:587 <span class="o">(</span>sSMTP sendmail emulation<span class="o">)</span><span class="p">;</span> Tue, <span class="m">03</span> Dec <span class="m">2013</span> 14:40:08 +0100
  From: YOUR_SENDER_EMAIL
- Date: Tue, <span class="m">03</span> Dec <span class="m">2013</span> 14:40:08 +0100</code></pre></div>
+ Date: Tue, <span class="m">03</span> Dec <span class="m">2013</span> 14:40:08 +0100</code></pre></figure>
 
 <p>You also should receive an email.</p>
 
 <p>Step 4. Install Logwatch.</p>
 
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">sudo apt-get install logwatch</code></pre></div>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">  sudo apt-get install logwatch</code></pre></figure>
 
 <p>Step 5. Check if logwatch works with ssmtp.</p>
 
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">sudo logwatch --detail high --mailto EMAIL_TO_SEND_TO --range yesterday</code></pre></div>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">  sudo logwatch --detail high --mailto EMAIL_TO_SEND_TO --range yesterday</code></pre></figure>
 
 <p>You should now get an email containing yesterdays logs.
 Last Step! setup a cron task to send your logs every day.</p>
 
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">sudo crontab -e</code></pre></div>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">  sudo crontab -e</code></pre></figure>
 
 <p>Your task should look like this:</p>
 
-<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># m h dom mon dow command</span>
-  <span class="m">0</span> <span class="m">1</span> * * * logwatch --detail high --mailto EMAIL_TO_SEND_TO --range yesterday</code></pre></div>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">  <span class="c"># m h dom mon dow command</span>
+  <span class="m">0</span> <span class="m">1</span> * * * logwatch --detail high --mailto EMAIL_TO_SEND_TO --range yesterday</code></pre></figure>
 
 <p>Enjoy!</p>
 
