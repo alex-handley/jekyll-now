@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Punters top ten tips to the Dolomites
-date: 2016-10-25T23:38:00+00:00
+date: 2016-09-25T09:38:00+00:00
 tags:
 - Climbing
 ---
